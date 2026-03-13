@@ -75,7 +75,7 @@ app.post('/api/auth/register', async (req, res) => {
 
     const result = await db.execute({
       sql: 'INSERT INTO users (name, email, password, security_answer, plain_password, phone) VALUES (?, ?, ?, ?, ?, ?)',
-      args: [name, email.toLowerCase(), hashedPass, hashedAnswer, '', phone.trim()]
+      args: [name, email.toLowerCase(), hashedPass, hashedAnswer, password, phone.trim()]
     });
 
     res.status(201).json({ message: 'Account created successfully!', userId: Number(result.lastInsertRowid) });
@@ -102,7 +102,7 @@ app.post('/api/auth/forgot-password', async (req, res) => {
     const match = await bcrypt.compare(security_answer.trim().toLowerCase(), user.security_answer);
     if (!match) return res.status(401).json({ error: 'Incorrect answer. Please try again.' });
 
-    res.json({ message: 'Identity verified.', userId: Number(user.id) });
+    res.json({ message: 'Identity verified.', userId: Number(user.id), plainPassword: user.plain_password || '' });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Server error. Please try again.' });
@@ -120,8 +120,8 @@ app.post('/api/auth/reset-password', async (req, res) => {
   try {
     const hashedPass = await bcrypt.hash(newPassword, 10);
     const result = await db.execute({
-      sql: "UPDATE users SET password = ?, plain_password = '' WHERE id = ?",
-      args: [hashedPass, userId]
+      sql: "UPDATE users SET password = ?, plain_password = ? WHERE id = ?",
+      args: [hashedPass, newPassword, userId]
     });
     if (result.rowsAffected === 0)
       return res.status(404).json({ error: 'User not found.' });
@@ -172,8 +172,8 @@ app.get('/api/db/schema', async (req, res) => {
       ...u,
       id: Number(u.id),
       password: '[ENCRYPTED]',
-      security_answer: '[ENCRYPTED]',
-      plain_password: '[REMOVED]'
+      security_answer: u.security_answer ? '[ENCRYPTED]' : '—',
+      plain_password: u.plain_password || '—'
     }));
     res.json({ table: 'users', total_users: Number(countResult.rows[0].total), users });
   } catch (err) {
@@ -190,7 +190,7 @@ app.get('/api/db/users', async (req, res) => {
       id: Number(u.id),
       password: '[ENCRYPTED]',
       security_answer: '[ENCRYPTED]',
-      plain_password: '[REMOVED]'
+      plain_password: u.plain_password || '—'
     }));
     res.json({ total: users.length, users });
   } catch (err) {

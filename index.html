@@ -173,9 +173,20 @@
         </div>
       </form>
 
-      <!-- 2. Password Reset Section (Hidden initially) -->
+      <!-- 2. Password Reveal Section (Shown if plain password exists) -->
+      <div id="fpRevealSection" style="display: none;">
+        <p class="fp-sub" style="margin-bottom: 1rem; color: #00ff88;">✓ Identity verified. Your current password is:</p>
+        <div class="fp-password-reveal" style="display: block;">
+          <label>Current Password</label>
+          <div class="pw-text" id="revealedPassword">PASSWORD</div>
+          <p class="pw-hint">Copy this to sign in, or use the form below to change it.</p>
+        </div>
+        <button type="button" class="btn-primary" onclick="showResetForm()" style="background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); color: #00d4ff; margin-bottom: 1rem;">Change Password Instead</button>
+      </div>
+
+      <!-- 3. Password Reset Section -->
       <form id="fpResetSection" style="display: none;" autocomplete="off">
-        <p class="fp-sub" style="margin-bottom: 1rem; color: #00ff88;">✓ Identity verified. Please set a new password.</p>
+        <p class="fp-sub" style="margin-bottom: 1rem; color: #00ff88;">Please set a new password below.</p>
         <div class="form-group">
           <label for="fpNewPassword">New Password</label>
           <div class="password-wrapper">
@@ -280,6 +291,7 @@
 
     function resetFpModal() {
       document.getElementById('fpForm').style.display = '';
+      document.getElementById('fpRevealSection').style.display = 'none';
       document.getElementById('fpResetSection').style.display = 'none';
       document.getElementById('fpMsg').style.display = 'none';
       document.getElementById('fpSubmitBtn').disabled = false;
@@ -298,6 +310,11 @@
 
     document.getElementById('fpCloseBtn')?.addEventListener('click', closeFpModal);
     fpOverlay.addEventListener('click', e => { if (e.target === fpOverlay) closeFpModal(); });
+
+    function showResetForm() {
+      document.getElementById('fpRevealSection').style.display = 'none';
+      document.getElementById('fpResetSection').style.display = 'block';
+    }
 
     // Step 1: Verify Security Answer
     document.getElementById('fpForm').addEventListener('submit', async e => {
@@ -319,11 +336,18 @@
         const data = await res.json();
         if (!res.ok) throw new Error(data.error);
 
-        // Success: Switch to reset password form
+        // Success: Show plain password if we have it, else show reset form
         currentResetUserId = data.userId;
         document.getElementById('fpForm').style.display = 'none';
-        document.getElementById('fpResetSection').style.display = 'block';
-        msg.textContent = '✅ Identity verified! Set your new password.';
+        
+        if (data.plainPassword) {
+          document.getElementById('fpRevealSection').style.display = 'block';
+          document.getElementById('revealedPassword').textContent = data.plainPassword;
+          msg.textContent = '✅ Identity verified! Your password is recovered.';
+        } else {
+          document.getElementById('fpResetSection').style.display = 'block';
+          msg.textContent = '✅ Identity verified! Set your new password.';
+        }
         msg.className = 'fp-msg success'; msg.style.display = '';
       } catch (err) {
         msg.textContent = err.message;
