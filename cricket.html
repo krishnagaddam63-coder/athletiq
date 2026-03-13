@@ -1,0 +1,889 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AthletiQ Cricket Drills — Batting, bowling, fielding and fitness training for young cricketers.">
+  <title>AthletiQ — Cricket Drills</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+  <div class="app-layout">
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-icon">A</div>
+        <span>AthletiQ</span>
+      </div>
+      <div class="sidebar-nav">
+        <p class="nav-section-title">Main Menu</p>
+        <a href="dashboard.html" class="nav-link"><span class="nav-icon">🏠</span> Dashboard</a>
+        <p class="nav-section-title">Sports</p>
+        <a href="cricket.html" class="nav-link cricket-link active"><span class="nav-icon">🏏</span> Cricket</a>
+        <a href="kabaddi.html" class="nav-link kabaddi-link"><span class="nav-icon">🤼</span> Kabaddi</a>
+        <a href="athletics.html" class="nav-link athletics-link"><span class="nav-icon">🏃</span> Athletics</a>
+        <p class="nav-section-title">Account</p>
+        <a href="profile.html" class="nav-link"><span class="nav-icon">👤</span> Profile</a>
+        <a href="settings.html" class="nav-link"><span class="nav-icon">⚙️</span> Settings</a>
+      </div>
+      <div class="sidebar-footer">
+        <a href="#" class="nav-link" id="logoutBtn"><span class="nav-icon">🚪</span> Logout</a>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="main-header">
+        <div class="header-left">
+          <button class="menu-toggle" id="menuToggle">☰</button>
+          <div class="header-search">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Search cricket drills..." id="globalSearch">
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="header-avatar" id="userAvatar">A</div>
+        </div>
+      </header>
+
+      <div class="page-content">
+        <!-- Cricket Banner -->
+        <div class="sport-banner animate-fadeInUp">
+          <img src="assets/cricket_banner.png" alt="Cricket action">
+          <div class="sport-banner-overlay">
+            <h1 style="color: var(--cricket-color);">🏏 Cricket Drills</h1>
+            <p>Master batting, bowling, fielding and fitness with drills designed for young cricketers aged 8–18.</p>
+          </div>
+        </div>
+
+        <!-- Weekly Plan -->
+        <div id="weeklyPlanContainer" data-sport="cricket"></div>
+
+        <!-- Filters -->
+        <div class="filters-bar" id="filtersBar">
+          <button class="filter-btn cricket-filter active" data-filter="all">All Drills</button>
+          <button class="filter-btn cricket-filter" data-filter="batting">Batting</button>
+          <button class="filter-btn cricket-filter" data-filter="bowling">Bowling</button>
+          <button class="filter-btn cricket-filter" data-filter="fielding">Fielding</button>
+          <button class="filter-btn cricket-filter" data-filter="fitness">Fitness</button>
+        </div>
+
+        <!-- Drills Grid -->
+        <div class="drills-grid" id="drillsGrid">
+
+          <div class="drill-card animate-fadeInUp delay-1" data-category="batting" data-difficulty="beginner">
+            <div class="drill-card-header">
+              <div>
+                <h3>Shadow Batting</h3>
+                <span class="drill-category">Batting</span>
+              </div>
+              <span class="drill-badge beginner">Beginner</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Practice your stance and bat swing without a ball. Focus on footwork, head position, and follow-through for each shot.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 15 min</span>
+              <span>🔄 3 sets</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=cricket%20Shadow%20Batting%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'cricket', 'Shadow Batting')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Take your batting stance in front of a mirror or open area</li>
+                  <li>Practice front-foot defence 20 times — focus on leading with your head</li>
+                  <li>Practice back-foot punch 20 times — transfer weight smoothly</li>
+                  <li>Play cover drive motions 20 times — ensure full bat swing</li>
+                  <li>Repeat pull shot, cut shot, and straight drive sequences</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Keep your eyes level and head still. Imagine a real bowler while practising — visualisation builds muscle memory faster.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-2" data-category="batting" data-difficulty="beginner">
+            <div class="drill-card-header">
+              <div>
+                <h3>Cone Balance Drill</h3>
+                <span class="drill-category">Batting</span>
+              </div>
+              <span class="drill-badge beginner">Beginner</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Improve your base and balance by batting while standing between two cones to restrict wide unwanted movements.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 10 min</span>
+              <span>🔄 5 overs</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=cricket%20Cone%20Balance%20Drill%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'cricket', 'Cone Balance Drill')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Place two cones shoulder-width apart around your stance</li>
+                  <li>Do stationary drives without knocking over the cones</li>
+                  <li>Focus strictly on head alignment over the front knee</li>
+                  <li>Gradually increase swing speed while maintaining balance</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Balance is everything in batting. Your head should always lead the movement, not your hands.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-3" data-category="batting" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Throw-Down Hitting</h3>
+                <span class="drill-category">Batting</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Face throw-downs from a partner at varying pace and length. Focus on timing, shot selection, and playing straight.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 20 min</span>
+              <span>🔄 5 sets of 12</span>
+              <span>👥 Partner</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=cricket%20Throw-Down%20Hitting%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'cricket', 'Throw-Down Hitting')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Set up in the nets with full batting gear</li>
+                  <li>Partner throws from 16 yards at moderate pace</li>
+                  <li>First set: play only defensive shots</li>
+                  <li>Second set: drive every ball on the ground</li>
+                  <li>Third set: mix attacking and defending naturally</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Watch the ball from the hand. Don't pre-decide your shot — react to the length and play accordingly.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-4" data-category="batting" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>One-Handed Drives</h3>
+                <span class="drill-category">Batting</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Use only your top hand or bottom hand independently to build specific forearm strength and bat control.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 10 min</span>
+              <span>🔄 30 balls</span>
+              <span>👥 Partner</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=cricket%20One-Handed%20Drives%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'cricket', 'One-Handed Drives')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Take your stance holding the bat with only your top hand</li>
+                  <li>Have a partner toss the ball gently underarm</li>
+                  <li>Drive the ball focusing on maintaining a high elbow</li>
+                  <li>Switch to bottom hand only for power hitting practice</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Your top hand controls the direction of the shot, while your bottom hand controls the power.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-1" data-category="batting" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Spin Sweep Practice</h3>
+                <span class="drill-category">Batting</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Dedicated practice for playing the sweep shot against spinners to counter turning deliveries.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 15 min</span>
+              <span>🔄 30 balls</span>
+              <span>👥 Partner</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=cricket%20Spin%20Sweep%20Practice%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'cricket', 'Spin Sweep Practice')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Stretch your front leg out fully towards the pitch of the ball</li>
+                  <li>Keep your head completely still and over your front knee</li>
+                  <li>Bring the bat from high to low across the line of the ball</li>
+                  <li>Roll your wrists to keep the ball on the ground</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Never pre-meditate the sweep. Only play it to balls pitched on a good length around leg stump.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-2" data-category="bowling" data-difficulty="beginner">
+            <div class="drill-card-header">
+              <div>
+                <h3>Target Bowling</h3>
+                <span class="drill-category">Bowling</span>
+              </div>
+              <span class="drill-badge beginner">Beginner</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Bowl at a target cone placed on a good length spot. Focus on run-up rhythm, release point, and consistent line.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 20 min</span>
+              <span>🔄 6 overs</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=cricket%20Target%20Bowling%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'cricket', 'Target Bowling')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Place a target cone on a good length at off-stump line</li>
+                  <li>Mark your run-up starting point</li>
+                  <li>Bowl 6 balls per over, aiming to hit the cone</li>
+                  <li>Track how many times you hit or pass close to the target</li>
+                  <li>Move the target to different lengths between overs</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Consistency &gt; speed. Focus on hitting the same spot repeatedly before increasing your pace.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-3" data-category="bowling" data-difficulty="beginner">
+            <div class="drill-card-header">
+              <div>
+                <h3>Wall Bowling Rhythm</h3>
+                <span class="drill-category">Bowling</span>
+              </div>
+              <span class="drill-badge beginner">Beginner</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Bowl against a wall or net from a short distance to purely focus on your bowling action and follow-through.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 15 min</span>
+              <span>🔄 40 balls</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=cricket%20Wall%20Bowling%20Rhythm%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'cricket', 'Wall Bowling Rhythm')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Stand 5 meters from a wall or heavy net</li>
+                  <li>Take a 3-step run-up</li>
+                  <li>Bowl with full action but moderate pace</li>
+                  <li>Focus on pulling your non-bowling arm down aggressively</li>
+                  <li>Ensure your back leg comes all the way through</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Your non-bowling arm acts like a steering wheel. Pull it down hard to generate momentum.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-4" data-category="bowling" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Crease Variety Drill</h3>
+                <span class="drill-category">Bowling</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Practice delivering the ball from different widths of the crease to change the angle of delivery.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 20 min</span>
+              <span>🔄 5 overs</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=cricket%20Crease%20Variety%20Drill%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'cricket', 'Crease Variety Drill')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Over 1: Bowl close to the stumps</li>
+                  <li>Over 2: Bowl from the middle of the crease</li>
+                  <li>Over 3: Bowl wide of the crease</li>
+                  <li>Over 4 &amp; 5: Mix the angles randomly</li>
+                  <li>Aim to hit the same good length regardless of the starting angle</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Bowling wide of the crease creates an angle in to the batsman, making LBW or bowled more likely.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-1" data-category="bowling" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Slower Ball Mastery</h3>
+                <span class="drill-category">Bowling</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Develop variations by practicing off-cutters, leg-cutters, and back-of-the-hand slower deliveries.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 15 min</span>
+              <span>🔄 4 overs</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=cricket%20Slower%20Ball%20Mastery%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'cricket', 'Slower Ball Mastery')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Maintain the exact same arm speed as your fast delivery</li>
+                  <li>Roll your fingers down the side of the ball for an off-cutter</li>
+                  <li>Bowl 12 cutters, focusing on length</li>
+                  <li>Practice the back-of-the-hand slower ball for 12 deliveries</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>The secret to a good slower ball is arm speed deception. Fake the fast ball, but change the grip at the last millisecond.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-2" data-category="bowling" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Yorker Execution</h3>
+                <span class="drill-category">Bowling</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Nail the blockhole by practicing bowling full deliveries at the base of the stumps.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 15 min</span>
+              <span>🔄 30 balls</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=cricket%20Yorker%20Execution%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'cricket', 'Yorker Execution')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Place a shoe or cone directly on the batting crease</li>
+                  <li>Aim to hit the object with every delivery</li>
+                  <li>Release the ball slightly later than your standard delivery</li>
+                  <li>Keep your eyes locked on the base of the stumps</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Don't bowl the yorker by looking down early. Look at the batsman's toes during release.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-3" data-category="fielding" data-difficulty="beginner">
+            <div class="drill-card-header">
+              <div>
+                <h3>Ground Fielding Circuit</h3>
+                <span class="drill-category">Fielding</span>
+              </div>
+              <span class="drill-badge beginner">Beginner</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Improve ground fielding with a circuit that covers pick-up-and-throw, diving stops, and underarm hits.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 15 min</span>
+              <span>🔄 4 rounds</span>
+              <span>👥 Team</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=cricket%20Ground%20Fielding%20Circuit%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'cricket', 'Ground Fielding Circuit')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Set up 4 stations in a square: attack, pick-up, dive, throw</li>
+                  <li>Station 1: Charge at the ball, pick up on the move and throw</li>
+                  <li>Station 2: Field a rolling ball off your weaker side</li>
+                  <li>Station 3: Dive to stop a wide throw, recover, and throw</li>
+                  <li>Station 4: Underarm hit the stumps from 10 metres</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Get low — bent knees and soft hands are the foundation of great fielding. Watch the ball into your hands.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-4" data-category="fielding" data-difficulty="beginner">
+            <div class="drill-card-header">
+              <div>
+                <h3>Underarm Direct Hits</h3>
+                <span class="drill-category">Fielding</span>
+              </div>
+              <span class="drill-badge beginner">Beginner</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Practice close-in fielding by retrieving the ball and accurately throwing underarm at single stumps.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 10 min</span>
+              <span>🔄 20 throws</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=cricket%20Underarm%20Direct%20Hits%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'cricket', 'Underarm Direct Hits')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Place a single stump 10 meters away</li>
+                  <li>Roll the ball out softly in front of you</li>
+                  <li>Run in, pick up with one hand outside your front foot</li>
+                  <li>Use an underarm flick to hit the stump while moving</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Keep your throwing arm straight and point your lead shoulder at the target during the flick.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-1" data-category="fielding" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>High Catch Practice</h3>
+                <span class="drill-category">Fielding</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Practice taking high catches with a partner using a sling or high throws. Build confidence under pressure.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 15 min</span>
+              <span>🔄 20 catches</span>
+              <span>👥 Partner</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=cricket%20High%20Catch%20Practice%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'cricket', 'High Catch Practice')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Partner hits or throws the ball high into the air (30+ meters)</li>
+                  <li>Sprint to get under the ball quickly</li>
+                  <li>Form a cup with your hands at eye level (reverse cup or standard)</li>
+                  <li>Cushion the ball softly into your chest as you catch it</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Never take your eyes off the ball while it is in the air. Keep your hands soft to absorb the impact.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-2" data-category="fielding" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Slip Cordon Reflexes</h3>
+                <span class="drill-category">Fielding</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Enhance your reaction time in the slips using a deflection board or by having a partner edge the ball.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 15 min</span>
+              <span>🔄 30 catches</span>
+              <span>👥 Partner</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=cricket%20Slip%20Cordon%20Reflexes%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'cricket', 'Slip Cordon Reflexes')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Stand in a low, athletic crouch with hands ready at knee height</li>
+                  <li>Partner throws the ball hard against a deflection board or wall</li>
+                  <li>React instantly to catch the deflected ball</li>
+                  <li>Stay low! Most slip catches go down rather than up.</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Keep your weight on the balls of your feet. If you are resting on your heels, you won't react fast enough.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-3" data-category="fielding" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Boundary Relay Throws</h3>
+                <span class="drill-category">Fielding</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Simulate chasing a boundary ball, sliding to stop it, and throwing a flat, hard return over the stumps.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 20 min</span>
+              <span>🔄 15 runs</span>
+              <span>👥 Team</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=cricket%20Boundary%20Relay%20Throws%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'cricket', 'Boundary Relay Throws')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Sprint 30 meters to chase a ball rolling towards the boundary</li>
+                  <li>Execute a sliding stop using your shin and knee</li>
+                  <li>Pop up instantly using your momentum</li>
+                  <li>Throw a flat, one-bounce return to the wicketkeeper</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>When sliding, tuck your lead leg underneath and slide on the side of your calf and thigh to avoid injury.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-4" data-category="fitness" data-difficulty="beginner">
+            <div class="drill-card-header">
+              <div>
+                <h3>Crease Sprints (Shuttle Runs)</h3>
+                <span class="drill-category">Fitness</span>
+              </div>
+              <span class="drill-badge beginner">Beginner</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Build the explosive speed and turning ability required for running between the wickets.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 15 min</span>
+              <span>🔄 10 sprints</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=cricket%20Crease%20Sprints%20(Shuttle%20Runs)%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'cricket', 'Crease Sprints (Shuttle Runs)')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Mark out a distance of 20 meters (pitch length)</li>
+                  <li>Sprint from one end to the other with your bat</li>
+                  <li>Slide your bat over the line, turn sharply, and sprint back (a "two")</li>
+                  <li>Rest for 30 seconds and repeat 10 times</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Always turn facing the ball (or the side where the ball would normally be hit) so you don't run blind.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-1" data-category="fitness" data-difficulty="beginner">
+            <div class="drill-card-header">
+              <div>
+                <h3>Core Medicine Ball Twists</h3>
+                <span class="drill-category">Fitness</span>
+              </div>
+              <span class="drill-badge beginner">Beginner</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Develop the rotational core strength essential for powerful batting and bowling.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 10 min</span>
+              <span>🔄 3 sets of 20</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=cricket%20Core%20Medicine%20Ball%20Twists%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'cricket', 'Core Medicine Ball Twists')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Sit on the ground with knees bent, holding a medicine ball</li>
+                  <li>Lean back slightly to engage your core, lifting feet off the floor</li>
+                  <li>Twist your torso to touch the ball to the ground on your left</li>
+                  <li>Twist rapidly to touch the ball on your right</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>The power for big hits comes from your core and hips, not just your arms. Keep movements explosive.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-2" data-category="fitness" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Bowler's Bound Variations</h3>
+                <span class="drill-category">Fitness</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Enhance your bowling run-up momentum with plyometric bounding exercises to build leg power.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 15 min</span>
+              <span>🔄 4 sets of 20m</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=cricket%20Bowler's%20Bound%20Variations%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'cricket', 'Bowler\'s Bound Variations')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Perform exaggerated bounding strides over 20 meters</li>
+                  <li>Drive your knee high and push off forcefully with your back leg</li>
+                  <li>Use your arms actively to generate vertical and forward momentum</li>
+                  <li>Walk back to the start to recover</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Focus on maximum air time and stride length rather than speed.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-3" data-category="fitness" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Reaction Ball Agility</h3>
+                <span class="drill-category">Fitness</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Use an unpredictable reaction ball to improve footwork agility and hand-eye coordination.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 10 min</span>
+              <span>🔄 5 minutes</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=cricket%20Reaction%20Ball%20Agility%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'cricket', 'Reaction Ball Agility')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Drop or throw a 6-sided reaction ball against a wall</li>
+                  <li>React quickly to catch it before it bounces twice</li>
+                  <li>Stay low in an athletic stance throughout the drill</li>
+                  <li>Increase the throw speed as you get better</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Don't try to guess where the ball will go. Stay relaxed, balanced, and let your reflexes take over.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-4" data-category="fitness" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Shoulder Resistance Bands</h3>
+                <span class="drill-category">Fitness</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Strengthen the rotator cuff and shoulder muscles to increase throwing distance and prevent injuries.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 10 min</span>
+              <span>🔄 3 sets of 15</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=cricket%20Shoulder%20Resistance%20Bands%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'cricket', 'Shoulder Resistance Bands')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Attach a resistance band to a fence at shoulder height</li>
+                  <li>Perform internal and external rotations with your throwing arm</li>
+                  <li>Perform simulated throwing motions against the band's resistance</li>
+                  <li>Focus on a slow, controlled release (eccentric movement)</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Cricket places terrible strain on the rotator cuff. Daily band work is the best way to extend your career.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+
+
+</body></html>

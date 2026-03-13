@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AthletiQ Settings — Customize your experience, change theme, and manage preferences.">
+  <title>AthletiQ — Settings</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+  <div class="app-layout">
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-icon">A</div>
+        <span>AthletiQ</span>
+      </div>
+      <div class="sidebar-nav">
+        <p class="nav-section-title">Main Menu</p>
+        <a href="dashboard.html" class="nav-link"><span class="nav-icon">🏠</span> Dashboard</a>
+        <p class="nav-section-title">Sports</p>
+        <a href="cricket.html" class="nav-link cricket-link"><span class="nav-icon">🏏</span> Cricket</a>
+        <a href="kabaddi.html" class="nav-link kabaddi-link"><span class="nav-icon">🤼</span> Kabaddi</a>
+        <a href="athletics.html" class="nav-link athletics-link"><span class="nav-icon">🏃</span> Athletics</a>
+        <p class="nav-section-title">Account</p>
+        <a href="profile.html" class="nav-link"><span class="nav-icon">👤</span> Profile</a>
+        <a href="settings.html" class="nav-link active"><span class="nav-icon">⚙️</span> Settings</a>
+      </div>
+      <div class="sidebar-footer">
+        <a href="#" class="nav-link" id="logoutBtn"><span class="nav-icon">🚪</span> Logout</a>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="main-header">
+        <div class="header-left">
+          <button class="menu-toggle" id="menuToggle">☰</button>
+          <div class="header-search">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Search settings..." id="globalSearch">
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="header-avatar" id="userAvatar">A</div>
+        </div>
+      </header>
+
+      <div class="page-content">
+        <div class="section-header" style="margin-bottom: 2rem;">
+          <h2>⚙️ Settings</h2>
+        </div>
+
+        <div class="settings-grid">
+
+          <!-- Appearance -->
+          <div class="settings-card animate-fadeInUp delay-1">
+            <div class="settings-card-header">
+              <div class="settings-card-icon" style="background: rgba(168, 85, 247, 0.15); color: var(--accent-purple);">🎨</div>
+              <div>
+                <h3>Appearance</h3>
+                <p>Customize the look and feel of AthletiQ</p>
+              </div>
+            </div>
+            <div class="settings-card-body">
+
+              <!-- Theme Switcher -->
+              <div class="settings-option">
+                <div class="settings-option-info">
+                  <h4>Theme</h4>
+                  <p>Choose your preferred color scheme</p>
+                </div>
+                <div class="theme-switcher" id="themeSwitcher">
+                  <button class="theme-option active" data-theme="dark" id="themeDark">
+                    <span class="theme-icon">🌙</span>
+                    <span>Dark</span>
+                  </button>
+                  <button class="theme-option" data-theme="light" id="themeLight">
+                    <span class="theme-icon">☀️</span>
+                    <span>Light</span>
+                  </button>
+                  <button class="theme-option" data-theme="midnight" id="themeMidnight">
+                    <span class="theme-icon">🌌</span>
+                    <span>Midnight</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Accent Color -->
+              <div class="settings-option">
+                <div class="settings-option-info">
+                  <h4>Accent Color</h4>
+                  <p>Choose primary accent color</p>
+                </div>
+                <div class="color-picker" id="accentColorPicker">
+                  <button class="color-dot active" data-color="#00d4ff" style="background: #00d4ff;" title="Cyan"></button>
+                  <button class="color-dot" data-color="#00ff88" style="background: #00ff88;" title="Green"></button>
+                  <button class="color-dot" data-color="#ff6b35" style="background: #ff6b35;" title="Orange"></button>
+                  <button class="color-dot" data-color="#a855f7" style="background: #a855f7;" title="Purple"></button>
+                  <button class="color-dot" data-color="#f472b6" style="background: #f472b6;" title="Pink"></button>
+                  <button class="color-dot" data-color="#facc15" style="background: #facc15;" title="Gold"></button>
+                </div>
+              </div>
+
+              <!-- Animations -->
+              <div class="settings-option">
+                <div class="settings-option-info">
+                  <h4>Animations</h4>
+                  <p>Enable or disable page animations</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="toggleAnimations" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Notifications -->
+          <div class="settings-card animate-fadeInUp delay-2">
+            <div class="settings-card-header">
+              <div class="settings-card-icon" style="background: rgba(0, 212, 255, 0.15); color: var(--accent-primary);">🔔</div>
+              <div>
+                <h3>Notifications</h3>
+                <p>Manage your notification preferences</p>
+              </div>
+            </div>
+            <div class="settings-card-body">
+              <div class="settings-option">
+                <div class="settings-option-info">
+                  <h4>Training Reminders</h4>
+                  <p>Get notified about your training schedule</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="toggleReminders" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <div class="settings-option">
+                <div class="settings-option-info">
+                  <h4>New Drills Alert</h4>
+                  <p>Get notified when new drills are added</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="toggleNewDrills" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <div class="settings-option">
+                <div class="settings-option-info">
+                  <h4>Weekly Progress Report</h4>
+                  <p>Receive a weekly summary of your progress</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="toggleWeeklyReport">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Privacy & Security -->
+          <div class="settings-card animate-fadeInUp delay-3">
+            <div class="settings-card-header">
+              <div class="settings-card-icon" style="background: rgba(0, 255, 136, 0.15); color: var(--accent-secondary);">🔒</div>
+              <div>
+                <h3>Privacy & Security</h3>
+                <p>Manage your privacy and security settings</p>
+              </div>
+            </div>
+            <div class="settings-card-body">
+              <div class="settings-option">
+                <div class="settings-option-info">
+                  <h4>Share Training Data</h4>
+                  <p>Share your progress with coaches</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="toggleShareData" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <div class="settings-option">
+                <div class="settings-option-info">
+                  <h4>Two-Factor Authentication</h4>
+                  <p>Add an extra layer of security</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="toggle2FA">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- About -->
+          <div class="settings-card animate-fadeInUp delay-4">
+            <div class="settings-card-header">
+              <div class="settings-card-icon" style="background: rgba(255, 107, 53, 0.15); color: var(--accent-warm);">ℹ️</div>
+              <div>
+                <h3>About AthletiQ</h3>
+                <p>App information and credits</p>
+              </div>
+            </div>
+            <div class="settings-card-body">
+              <div class="about-info">
+                <div class="about-row"><span>Version</span><span>2.0.0</span></div>
+                <div class="about-row"><span>Last Updated</span><span>March 2026</span></div>
+                <div class="about-row"><span>Sports Covered</span><span>Cricket, Kabaddi, Athletics</span></div>
+                <div class="about-row"><span>Total Drills</span><span>24</span></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

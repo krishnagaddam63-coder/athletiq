@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AthletiQ Dashboard — Track your training progress, explore drills, and manage your sports analytics.">
+  <title>AthletiQ — Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Sidebar Overlay (mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-icon">A</div>
+        <span>AthletiQ</span>
+      </div>
+
+      <div class="sidebar-nav">
+        <p class="nav-section-title">Main Menu</p>
+        <a href="dashboard.html" class="nav-link active">
+          <span class="nav-icon">🏠</span> Dashboard
+        </a>
+
+        <p class="nav-section-title">Sports</p>
+        <a href="cricket.html" class="nav-link cricket-link">
+          <span class="nav-icon">🏏</span> Cricket
+        </a>
+        <a href="kabaddi.html" class="nav-link kabaddi-link">
+          <span class="nav-icon">🤼</span> Kabaddi
+        </a>
+        <a href="athletics.html" class="nav-link athletics-link">
+          <span class="nav-icon">🏃</span> Athletics
+        </a>
+
+        <p class="nav-section-title">Account</p>
+        <a href="profile.html" class="nav-link">
+          <span class="nav-icon">👤</span> Profile
+        </a>
+        <a href="settings.html" class="nav-link">
+          <span class="nav-icon">⚙️</span> Settings
+        </a>
+      </div>
+
+      <div class="sidebar-footer">
+        <a href="#" class="nav-link" id="logoutBtn">
+          <span class="nav-icon">🚪</span> Logout
+        </a>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Header -->
+      <header class="main-header">
+        <div class="header-left">
+          <button class="menu-toggle" id="menuToggle">☰</button>
+          <div class="header-search">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Search drills, sports..." id="globalSearch">
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="header-avatar" id="userAvatar">A</div>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <div class="page-content">
+        <!-- Welcome Hero -->
+        <div class="welcome-hero animate-fadeInUp">
+          <img src="assets/hero_banner.png" alt="Sports action" class="welcome-hero-img">
+          <h1>Welcome back, <span id="userName">Athlete</span>!</h1>
+          <p>Ready to level up your game? Explore training drills across Cricket, Kabaddi, and Athletics designed for young champions.</p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+          <div class="stat-card animate-fadeInUp delay-1">
+            <div class="stat-icon blue">🎯</div>
+            <div class="stat-value">24</div>
+            <div class="stat-label">Drills Available</div>
+          </div>
+          <div class="stat-card animate-fadeInUp delay-2">
+            <div class="stat-icon green">🔥</div>
+            <div class="stat-value">3</div>
+            <div class="stat-label">Sports Covered</div>
+          </div>
+          <div class="stat-card animate-fadeInUp delay-3">
+            <div class="stat-icon orange">⏱️</div>
+            <div class="stat-value">40+</div>
+            <div class="stat-label">Training Hours</div>
+          </div>
+          <div class="stat-card animate-fadeInUp delay-4">
+            <div class="stat-icon purple">📈</div>
+            <div class="stat-value">85%</div>
+            <div class="stat-label">Progress Score</div>
+          </div>
+        </div>
+
+        <!-- Featured Sports -->
+        <div class="section-header">
+          <h2>Explore Sports</h2>
+        </div>
+
+        <div class="sports-grid">
+          <!-- Cricket Card -->
+          <a href="cricket.html" class="sport-card animate-fadeInUp delay-2" id="cricketCard">
+            <img src="assets/cricket_banner.png" alt="Cricket training">
+            <div class="sport-card-overlay">
+              <span class="sport-tag cricket">🏏 Cricket</span>
+              <h3>Cricket Training</h3>
+              <p>Master batting, bowling, fielding and fitness drills</p>
+            </div>
+            <div class="sport-card-arrow">→</div>
+          </a>
+
+          <!-- Kabaddi Card -->
+          <a href="kabaddi.html" class="sport-card animate-fadeInUp delay-3" id="kabaddiCard">
+            <img src="assets/kabaddi_banner.png" alt="Kabaddi training">
+            <div class="sport-card-overlay">
+              <span class="sport-tag kabaddi">🤼 Kabaddi</span>
+              <h3>Kabaddi Training</h3>
+              <p>Dominate with raiding, defending and agility drills</p>
+            </div>
+            <div class="sport-card-arrow">→</div>
+          </a>
+
+          <!-- Athletics Card -->
+          <a href="athletics.html" class="sport-card animate-fadeInUp delay-4" id="athleticsCard">
+            <img src="assets/athletics_banner.png" alt="Athletics training">
+            <div class="sport-card-overlay">
+              <span class="sport-tag athletics">🏃 Athletics</span>
+              <h3>Athletics Training</h3>
+              <p>Sprint faster, jump higher, throw farther</p>
+            </div>
+            <div class="sport-card-arrow">→</div>
+          </a>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

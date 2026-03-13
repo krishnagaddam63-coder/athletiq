@@ -1,0 +1,982 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AthletiQ Athletics Drills — Sprinting, long distance, jumping and throwing training for young track &amp; field athletes.">
+  <title>AthletiQ — Athletics Drills</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+  <div class="app-layout">
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-icon">A</div>
+        <span>AthletiQ</span>
+      </div>
+      <div class="sidebar-nav">
+        <p class="nav-section-title">Main Menu</p>
+        <a href="dashboard.html" class="nav-link"><span class="nav-icon">🏠</span> Dashboard</a>
+        <p class="nav-section-title">Sports</p>
+        <a href="cricket.html" class="nav-link cricket-link"><span class="nav-icon">🏏</span> Cricket</a>
+        <a href="kabaddi.html" class="nav-link kabaddi-link"><span class="nav-icon">🤼</span> Kabaddi</a>
+        <a href="athletics.html" class="nav-link athletics-link active"><span class="nav-icon">🏃</span> Athletics</a>
+        <p class="nav-section-title">Account</p>
+        <a href="profile.html" class="nav-link"><span class="nav-icon">👤</span> Profile</a>
+        <a href="settings.html" class="nav-link"><span class="nav-icon">⚙️</span> Settings</a>
+      </div>
+      <div class="sidebar-footer">
+        <a href="#" class="nav-link" id="logoutBtn"><span class="nav-icon">🚪</span> Logout</a>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="main-header">
+        <div class="header-left">
+          <button class="menu-toggle" id="menuToggle">☰</button>
+          <div class="header-search">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Search athletics drills..." id="globalSearch">
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="header-avatar" id="userAvatar">A</div>
+        </div>
+      </header>
+
+      <div class="page-content">
+        <!-- Athletics Banner -->
+        <div class="sport-banner animate-fadeInUp">
+          <img src="assets/athletics_banner.png" alt="Athletics action">
+          <div class="sport-banner-overlay">
+            <h1 style="color: var(--athletics-color);">🏃 Athletics Drills</h1>
+            <p>Sprint faster, jump higher, throw farther. Track &amp; field drills for young athletes aged 8–18.</p>
+          </div>
+        </div>
+
+        <!-- Weekly Plan -->
+        <div id="weeklyPlanContainer" data-sport="athletics"></div>
+
+        <!-- Filters -->
+        <div class="filters-bar" id="filtersBar">
+          <button class="filter-btn athletics-filter active" data-filter="all">All Drills</button>
+          <button class="filter-btn athletics-filter" data-filter="sprints">Sprinting</button>
+          <button class="filter-btn athletics-filter" data-filter="distance">Long Distance</button>
+          <button class="filter-btn athletics-filter" data-filter="jumping">Jumping</button>
+          <button class="filter-btn athletics-filter" data-filter="throwing">Throwing</button>
+        </div>
+
+        <!-- Drills Grid -->
+        <div class="drills-grid" id="drillsGrid">
+
+          <div class="drill-card animate-fadeInUp delay-1" data-category="sprints" data-difficulty="beginner">
+            <div class="drill-card-header">
+              <div>
+                <h3>A-Skips &amp; High Knees</h3>
+                <span class="drill-category">Sprints</span>
+              </div>
+              <span class="drill-badge beginner">Beginner</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Warm-up drill focusing on knee drive, posture, and active foot strike for efficient sprinting mechanics.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 10 min</span>
+              <span>🔄 3 x 20m</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=athletics%20A-Skips%20%26%20High%20Knees%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'athletics', 'A-Skips &amp; High Knees')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Start with a bouncing, rhythmic skip</li>
+                  <li>Drive your lead knee high up to hip level, keeping the toe pulled up (dorsiflexion)</li>
+                  <li>Strike the ground powerfully right beneath your center of mass</li>
+                  <li>Use aggressive arm action, driving elbows straight back</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>The goal is vertical force, not horizontal distance. Put force into the ground.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-2" data-category="sprints" data-difficulty="beginner">
+            <div class="drill-card-header">
+              <div>
+                <h3>Flying 30s</h3>
+                <span class="drill-category">Sprints</span>
+              </div>
+              <span class="drill-badge beginner">Beginner</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Work on maximum velocity mechanics by building up speed before holding max pace for 30 meters.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 15 min</span>
+              <span>🔄 4 sprints</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=athletics%20Flying%2030s%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'athletics', 'Flying 30s')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Set up a 20m acceleration zone and a 30m max velocity zone</li>
+                  <li>Build up speed to 95% effort through the first 20m</li>
+                  <li>Hold that maximum speed flawlessly through the 30m zone</li>
+                  <li>Decelerate slowly over the next 20m</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>During max speed, stay relaxed inside. Tensing your face, neck, or shoulders will dramatically slow you down.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-3" data-category="sprints" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Block Clearances</h3>
+                <span class="drill-category">Sprints</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Practice the explosive first three steps out of the starting blocks to improve acceleration phase.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 15 min</span>
+              <span>🔄 8 starts</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=athletics%20Block%20Clearances%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'athletics', 'Block Clearances')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Set up starting blocks and assume the "Set" position</li>
+                  <li>On "GO", violently throw your arms opposite to your legs</li>
+                  <li>Drive out at a 45-degree angle; do not stand straight up</li>
+                  <li>Take three massive, powerful push-steps, then reset</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Your first step shouldn't just be quick; it must be powerful. Push against the blocks, don't just step out of them.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-4" data-category="sprints" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Hill Sprints</h3>
+                <span class="drill-category">Sprints</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Use a steep incline to naturally force proper acceleration posture and build immense leg drive.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 20 min</span>
+              <span>🔄 6 sprints</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=athletics%20Hill%20Sprints%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'athletics', 'Hill Sprints')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Find a moderate to steep hill (about 20-30 meters long)</li>
+                  <li>Sprint to the top focusing strictly on high knees and arm drive</li>
+                  <li>Walk back down very slowly to allow full ATP recovery (2-3 mins)</li>
+                  <li>Repeat for 6 total high-quality reps</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Hills penalize poor mechanics instantly. If you stand too upright, you'll lose all power.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-1" data-category="sprints" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Resisted Sled Pulls</h3>
+                <span class="drill-category">Sprints</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Sprint while dragging a weighted sled to overload the nervous system and increase horizontal force production.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 15 min</span>
+              <span>🔄 5 sprints</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=athletics%20Resisted%20Sled%20Pulls%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'athletics', 'Resisted Sled Pulls')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Attach a harness and a sled with moderate weight (about 10-15% of body weight)</li>
+                  <li>Lean forward into the harness</li>
+                  <li>Drive the legs like pistons, doing 20m sprints</li>
+                  <li>Unclip the harness and do one "free" sprint to feel the contrast</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>If the sled alters your sprint mechanics (making you bend at the waist instead of the ankle/hip), the weight is too heavy.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-2" data-category="distance" data-difficulty="beginner">
+            <div class="drill-card-header">
+              <div>
+                <h3>Fartlek (Speed Play)</h3>
+                <span class="drill-category">Distance</span>
+              </div>
+              <span class="drill-badge beginner">Beginner</span>
+            </div>
+            <div class="drill-card-body">
+              <p>An unstructured interval run alternating between easy jogging and fast bursts to build aerobic and anaerobic capacity.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 30 min</span>
+              <span>🔄 Continuous</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=athletics%20Fartlek%20(Speed%20Play)%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'athletics', 'Fartlek (Speed Play)')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Warm up with an easy 10-minute jog</li>
+                  <li>Pick a landmark (tree, sign) and run fast until you reach it</li>
+                  <li>Jog slowly to recover until you catch your breath</li>
+                  <li>Pick another landmark and sprint. Repeat continuously for 15 mins</li>
+                  <li>Cool down with a 5-minute easy jog</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Keep it fun and varied. The goal is to get used to shifting gears during a race without a rigid script.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-3" data-category="distance" data-difficulty="beginner">
+            <div class="drill-card-header">
+              <div>
+                <h3>Cadence Counting</h3>
+                <span class="drill-category">Distance</span>
+              </div>
+              <span class="drill-badge beginner">Beginner</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Improve your running economy by increasing your step rate, reducing overstriding and impact forces.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 20 min</span>
+              <span>🔄 3 x 2 mins</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=athletics%20Cadence%20Counting%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'athletics', 'Cadence Counting')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Run at your normal, comfortable pace</li>
+                  <li>Count every time your right foot hits the ground for 60 seconds</li>
+                  <li>Double that number to get your steps-per-minute (cadence)</li>
+                  <li>Try to increase your cadence to around 170-180 SPM by taking shorter, quicker steps</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Overstriding acts as a braking force and ruins your knees. Your foot should land directly beneath you.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-4" data-category="distance" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Tempo Runs (Lactate Threshold)</h3>
+                <span class="drill-category">Distance</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Run at a comfortably hard pace (8/10 effort) for a sustained period to delay the onset of lactic acid.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 40 min</span>
+              <span>🔄 20 min tempo</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=athletics%20Tempo%20Runs%20(Lactate%20Threshold)%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'athletics', 'Tempo Runs (Lactate Threshold)')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Jog for 10 minutes to warm up</li>
+                  <li>Settle into a pace that is "comfortably hard" (you could speak in short sentences, but prefer not to)</li>
+                  <li>Hold this exact pace evenly for 20 continuous minutes</li>
+                  <li>Jog for 10 minutes to cool down</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>The biggest mistake runners make is running tempo runs too fast. It's not a race; it's threshold training.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-1" data-category="distance" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>1km VO2 Max Repeats</h3>
+                <span class="drill-category">Distance</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Brutal long intervals designed to increase your maximum oxygen uptake and mental toughness.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 45 min</span>
+              <span>🔄 5 x 1000m</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=athletics%201km%20VO2%20Max%20Repeats%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'athletics', '1km VO2 Max Repeats')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Warm up thoroughly on the track</li>
+                  <li>Run 1000m (2.5 laps) at your 5K race pace (90% max heart rate)</li>
+                  <li>Rest for exactly 3 minutes (light walking)</li>
+                  <li>Repeat 5 times, aiming for consistent times on every rep</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>If your first 1km is done in 3:30, and your last is 4:00, you started too fast. Pace correctly.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-2" data-category="distance" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Long Slow Distance (LSD)</h3>
+                <span class="drill-category">Distance</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Build mitochondrial density and capillary beds by performing the essential weekly long, slow run.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 60-90 min</span>
+              <span>🔄 1 run</span>
+              <span>👥 Group</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=athletics%20Long%20Slow%20Distance%20(LSD)%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'athletics', 'Long Slow Distance (LSD)')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Choose a scenic, flat route</li>
+                  <li>Run at a very relaxed, conversational pace (Zone 2 heart rate)</li>
+                  <li>Maintain this for 60 to 90 minutes without stopping</li>
+                  <li>Focus on relaxed breathing and posture</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>To run fast, you must run slow. This run builds the massive aerobic base that fuels your speed workouts.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-3" data-category="jumping" data-difficulty="beginner">
+            <div class="drill-card-header">
+              <div>
+                <h3>Standing Broad Jumps</h3>
+                <span class="drill-category">Jumping</span>
+              </div>
+              <span class="drill-badge beginner">Beginner</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Develop fundamental explosive horizontal power required for the long jump and triple jump.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 15 min</span>
+              <span>🔄 3 x 5 jumps</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=athletics%20Standing%20Broad%20Jumps%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'athletics', 'Standing Broad Jumps')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Stand with feet shoulder-width apart behind a line</li>
+                  <li>Drop into a quarter squat while swinging arms deeply backward</li>
+                  <li>Throw arms forward furiously while violently extending hips, knees, and ankles</li>
+                  <li>Land softly on both feet with a bend in the knee</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>The jump is generated 50% by your legs and 50% by your arm swing. Don't forget the arms.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-4" data-category="jumping" data-difficulty="beginner">
+            <div class="drill-card-header">
+              <div>
+                <h3>Box Jumps</h3>
+                <span class="drill-category">Jumping</span>
+              </div>
+              <span class="drill-badge beginner">Beginner</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Improve vertical power and fast-twitch muscle fiber recruitment using a sturdy plyometric box.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 15 min</span>
+              <span>🔄 4 x 5 jumps</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=athletics%20Box%20Jumps%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'athletics', 'Box Jumps')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Stand 1 foot away from a knee-to-waist high box</li>
+                  <li>Dip down and immediately explode upward onto the box</li>
+                  <li>Land softly in the center of the box in a partial squat</li>
+                  <li>Step down safely (do not jump backward off the box)</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Aim for "quiet" landings. If your feet slap the box loudly, your mechanics are too stiff.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-1" data-category="jumping" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Penultimate Step Bounds</h3>
+                <span class="drill-category">Jumping</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Practice the specialized final two steps of a long/high jump approach to convert horizontal speed to vertical height.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 20 min</span>
+              <span>🔄 15 approaches</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=athletics%20Penultimate%20Step%20Bounds%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'athletics', 'Penultimate Step Bounds')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Jog a 5-step approach toward a takeoff board or mark</li>
+                  <li>On the second-to-last step (penultimate), execute a longer, flatter step to lower your center of gravity naturally</li>
+                  <li>On the final stamp, plant the foot quickly and drive the free knee straight up to the sky</li>
+                  <li>Pop up into the air and land softly</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Do not sink down actively; the elongated penultimate step should naturally lower your hips.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-2" data-category="jumping" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Continuous Hurdle Hops</h3>
+                <span class="drill-category">Jumping</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Develop reactive plyometric ability (stiffness) by bouncing swiftly over a series of hurdles.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 15 min</span>
+              <span>🔄 5 lines</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=athletics%20Continuous%20Hurdle%20Hops%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'athletics', 'Continuous Hurdle Hops')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Set up 4 to 6 low hurdles spaced equal distances apart</li>
+                  <li>Hop over the first hurdle with two feet</li>
+                  <li>Minimize your ground contact time; bounce immediately over the next hurdle</li>
+                  <li>Keep your ankles stiff and bouncing like a pogo stick</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Imagine the ground is lava. Spend as little time on it as humanly possible.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-3" data-category="jumping" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Single-Leg Bounding</h3>
+                <span class="drill-category">Jumping</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Crucial drill for triple jumpers to build unilateral leg strength and phase transitioning.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 15 min</span>
+              <span>🔄 4 x 20m</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=athletics%20Single-Leg%20Bounding%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'athletics', 'Single-Leg Bounding')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Start with a walking approach</li>
+                  <li>Take off on your right foot and land on your right foot (Hop)</li>
+                  <li>Drive the left knee up forcefully</li>
+                  <li>Take off on your left foot and land on your left foot</li>
+                  <li>Link them continuously down the track (R-R-L-L)</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Maintain an upright posture. If you crash heavily on landing, your core is not engaged enough.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-4" data-category="throwing" data-difficulty="beginner">
+            <div class="drill-card-header">
+              <div>
+                <h3>Medicine Ball Chest Passes</h3>
+                <span class="drill-category">Throwing</span>
+              </div>
+              <span class="drill-badge beginner">Beginner</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Develop the fundamental fast-twitch pushing power required for shot put.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 10 min</span>
+              <span>🔄 3 x 10 throws</span>
+              <span>👤 Partner</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=athletics%20Medicine%20Ball%20Chest%20Passes%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'athletics', 'Medicine Ball Chest Passes')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Face your partner standing 5 meters away</li>
+                  <li>Hold a medicine ball at chest-level with elbows out</li>
+                  <li>Step into the throw and aggressively push the ball forward</li>
+                  <li>Flick your wrists at the end of the push for maximum velocity</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Drive the force from your hips and legs up through your shoulders, finishing squarely.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-1" data-category="throwing" data-difficulty="beginner">
+            <div class="drill-card-header">
+              <div>
+                <h3>Standing Javelin Throws</h3>
+                <span class="drill-category">Throwing</span>
+              </div>
+              <span class="drill-badge beginner">Beginner</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Isolate the upper body mechanics and block-leg mechanics of throwing without the complex run-up.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 20 min</span>
+              <span>🔄 15 throws</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=athletics%20Standing%20Javelin%20Throws%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'athletics', 'Standing Javelin Throws')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Stand sideways in a split stance with throwing arm straight back</li>
+                  <li>Keep the point of the javelin/ball near your eye line</li>
+                  <li>Drive the back hip forward aggressively</li>
+                  <li>Block (stop abruptly) the front leg straight, acting as a catapult lever</li>
+                  <li>Pull the arm over the top and release</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>The front leg must remain perfectly stiff on the throw. If the knee bends, the catapult leaks power.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-2" data-category="throwing" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Shot Put Glide Drills</h3>
+                <span class="drill-category">Throwing</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Master the linear glide to generate immense momentum across the circle before releasing the shot.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 20 min</span>
+              <span>🔄 20 glides</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=athletics%20Shot%20Put%20Glide%20Drills%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'athletics', 'Shot Put Glide Drills')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Start crouched at the back of the throwing circle facing backward</li>
+                  <li>Extend your free leg backward toward the throwing sector</li>
+                  <li>Push off your crouched leg, gliding low across the circle</li>
+                  <li>Land in the power position (split stance) facing sideways</li>
+                  <li>Immediately pivot the hips and execute the throw</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Stay low during the glide. Don't pop up until the final throwing motion.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-3" data-category="throwing" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Discus Half-Turn</h3>
+                <span class="drill-category">Throwing</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Learn the rotational mechanics of the discus throw starting from the center of the ring.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 20 min</span>
+              <span>🔄 20 turns</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=athletics%20Discus%20Half-Turn%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'athletics', 'Discus Half-Turn')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Stand in the middle of the circle facing sideways</li>
+                  <li>Swing the discus back to create tension/wrap</li>
+                  <li>Pivot on the ball of the right foot rapidly</li>
+                  <li>Whip the hips around to face the throwing area</li>
+                  <li>Release the discus flat with the index finger applying spin</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>The discus should be the absolute last thing to turn. Hips first, chest second, arm and implement last.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-4" data-category="throwing" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Javelin Crossover Steps</h3>
+                <span class="drill-category">Throwing</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Combine sprinting speed with throwing position by practicing the specific "karaoke" style approach steps.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 20 min</span>
+              <span>🔄 15 approaches</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=athletics%20Javelin%20Crossover%20Steps%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'athletics', 'Javelin Crossover Steps')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Sprint forward holding the implement at eye level</li>
+                  <li>Drop the javelin back while turning sideways</li>
+                  <li>Perform 3 explosive crossover steps (left over right, or vice versa)</li>
+                  <li>On the final step, plant the block leg with immense force</li>
+                  <li>Execute the throw seamlessly using the momentum</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Keep your shoulders facing the side, but your hips facing slightly forward during the crossovers.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+
+
+
+          <div class="drill-card animate-fadeInUp delay-2" data-category="jumping" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Approach Run High Jump</h3>
+                <span class="drill-category">Jumping</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Learn the curved approach run and take-off technique for high jump using the Fosbury Flop method.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 25 min</span>
+              <span>🔄 8 jumps</span>
+              <span>👥 Coach needed</span>
+            </div>
+            
+            
+            <a href="https://www.youtube.com/results?search_query=athletics%20Approach%20Run%20High%20Jump%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'athletics', 'Approach Run High Jump')">
+        🕒 Schedule Drill
+      </button><button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Mark a 5-stride curved approach (J-shape) with cones</li>
+                  <li>Walk through the curve to feel the lean into the bar</li>
+                  <li>Jog the approach and practise the penultimate step (second-to-last)</li>
+                  <li>Practice take-off without the bar — drive the inside knee up</li>
+                  <li>Full jump over a low bar, landing on the mat on your back</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Speed on the curve converts to height at take-off. Run fast, plant hard, drive the knee — and trust the mat!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Drill 7 -->
+          <div class="drill-card animate-fadeInUp delay-3" data-category="throwing" data-difficulty="beginner">
+            <div class="drill-card-header">
+              <div>
+                <h3>Medicine Ball Throws</h3>
+                <span class="drill-category">Throwing</span>
+              </div>
+              <span class="drill-badge beginner">Beginner</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Build throwing power and rotational strength with medicine ball exercises. Foundation for shot put and discus.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 15 min</span>
+              <span>🔄 4 sets of 8</span>
+              <span>👥 Partner</span>
+            </div>
+            
+            
+            <a href="https://www.youtube.com/results?search_query=athletics%20Medicine%20Ball%20Throws%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'athletics', 'Medicine Ball Throws')">
+        🕒 Schedule Drill
+      </button><button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Set 1: Overhead throws — stand, extend ball overhead, throw forward</li>
+                  <li>Set 2: Chest passes — push the ball explosively from chest height</li>
+                  <li>Set 3: Rotational throws — twist and release sideways (both sides)</li>
+                  <li>Set 4: Backward overhead throws — face away, throw over your head</li>
+                  <li>Use a 2–3 kg medicine ball appropriate for your age and strength</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Power comes from the ground up: push through your legs, rotate your hips, then release with your arms. The throw starts in your feet.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Drill 8 -->
+          
+
+        
+      
+    
+  
+
+  <script src="app.js"></script>
+
+
+</body></html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AthletiQ Profile — Manage your account details and personal information.">
+  <title>AthletiQ — My Profile</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+  <div class="app-layout">
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-icon">A</div>
+        <span>AthletiQ</span>
+      </div>
+      <div class="sidebar-nav">
+        <p class="nav-section-title">Main Menu</p>
+        <a href="dashboard.html" class="nav-link"><span class="nav-icon">🏠</span> Dashboard</a>
+        <p class="nav-section-title">Sports</p>
+        <a href="cricket.html" class="nav-link cricket-link"><span class="nav-icon">🏏</span> Cricket</a>
+        <a href="kabaddi.html" class="nav-link kabaddi-link"><span class="nav-icon">🤼</span> Kabaddi</a>
+        <a href="athletics.html" class="nav-link athletics-link"><span class="nav-icon">🏃</span> Athletics</a>
+        <p class="nav-section-title">Account</p>
+        <a href="profile.html" class="nav-link active"><span class="nav-icon">👤</span> Profile</a>
+        <a href="settings.html" class="nav-link"><span class="nav-icon">⚙️</span> Settings</a>
+      </div>
+      <div class="sidebar-footer">
+        <a href="#" class="nav-link" id="logoutBtn"><span class="nav-icon">🚪</span> Logout</a>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="main-header">
+        <div class="header-left">
+          <button class="menu-toggle" id="menuToggle">☰</button>
+          <div class="header-search">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Search..." id="globalSearch">
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="header-avatar" id="userAvatar">A</div>
+        </div>
+      </header>
+
+      <div class="page-content">
+        <!-- Page Header -->
+        <div class="section-header" style="margin-bottom: 2rem;">
+          <h2>👤 My Profile</h2>
+        </div>
+
+        <!-- Profile Header Card -->
+        <div class="profile-hero animate-fadeInUp">
+          <div class="profile-avatar-large" id="profileAvatarLarge">A</div>
+          <div class="profile-hero-info">
+            <h1 id="profileName">Athlete</h1>
+            <p id="profileEmail">athlete@example.com</p>
+            <span class="profile-badge">🏆 Young Champion</span>
+          </div>
+        </div>
+
+        <!-- Profile Details -->
+        <div class="profile-grid">
+          <!-- Account Information -->
+          <div class="profile-card animate-fadeInUp delay-1">
+            <div class="profile-card-header">
+              <h3>🔐 Account Information</h3>
+              <button class="btn-edit" id="editAccountBtn">Edit</button>
+            </div>
+            <div class="profile-card-body">
+              <div class="profile-field">
+                <label>Full Name</label>
+                <div class="profile-value" id="fieldName">
+                  <input type="text" id="inputName" disabled>
+                </div>
+              </div>
+              <div class="profile-field">
+                <label>Email Address</label>
+                <div class="profile-value" id="fieldEmail">
+                  <input type="email" id="inputEmail" disabled>
+                </div>
+              </div>
+              <div class="profile-field">
+                <label>Password</label>
+                <div class="profile-value">
+                  <input type="password" id="inputPassword" value="••••••••" disabled>
+                  <button class="btn-reveal" id="togglePassword" title="Show/Hide password">👁️</button>
+                </div>
+              </div>
+              <div class="profile-field">
+                <label>Phone Number</label>
+                <div class="profile-value">
+                  <input type="tel" id="inputPhone" placeholder="Add phone number" disabled>
+                </div>
+              </div>
+              <div class="profile-actions" id="accountActions" style="display:none;">
+                <button class="btn-save" id="saveAccountBtn">Save Changes</button>
+                <button class="btn-cancel" id="cancelAccountBtn">Cancel</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sports Preferences -->
+          <div class="profile-card animate-fadeInUp delay-2">
+            <div class="profile-card-header">
+              <h3>🏅 Sports Preferences</h3>
+              <button class="btn-edit" id="editSportsBtn">Edit</button>
+            </div>
+            <div class="profile-card-body">
+              <div class="profile-field">
+                <label>Primary Sport</label>
+                <div class="profile-value">
+                  <select id="primarySport" disabled>
+                    <option value="cricket">🏏 Cricket</option>
+                    <option value="kabaddi">🤼 Kabaddi</option>
+                    <option value="athletics">🏃 Athletics</option>
+                  </select>
+                </div>
+              </div>
+              <div class="profile-field">
+                <label>Experience Level</label>
+                <div class="profile-value">
+                  <select id="expLevel" disabled>
+                    <option value="beginner">Beginner (1–2 yrs)</option>
+                    <option value="intermediate" selected>Intermediate (3–5 yrs)</option>
+                                      </select>
+                </div>
+              </div>
+              <div class="profile-field">
+                <label>Age Group</label>
+                <div class="profile-value">
+                  <select id="ageGroup" disabled>
+                    <option value="8-10">8 – 10 years</option>
+                    <option value="11-13" selected>11 – 13 years</option>
+                    <option value="14-16">14 – 16 years</option>
+                    <option value="17-18">17 – 18 years</option>
+                    <option value="19+">19+ years</option>
+                  </select>
+                </div>
+              </div>
+              <div class="profile-field">
+                <label>Interested Sports</label>
+                <div class="sport-checkboxes" id="sportCheckboxes">
+                  <label class="sport-checkbox">
+                    <input type="checkbox" id="checkCricket" value="cricket" checked disabled>
+                    <span class="sport-checkbox-label cricket">🏏 Cricket</span>
+                  </label>
+                  <label class="sport-checkbox">
+                    <input type="checkbox" id="checkKabaddi" value="kabaddi" checked disabled>
+                    <span class="sport-checkbox-label kabaddi">🤼 Kabaddi</span>
+                  </label>
+                  <label class="sport-checkbox">
+                    <input type="checkbox" id="checkAthletics" value="athletics" checked disabled>
+                    <span class="sport-checkbox-label athletics">🏃 Athletics</span>
+                  </label>
+                </div>
+              </div>
+              <div class="profile-actions" id="sportsActions" style="display:none;">
+                <button class="btn-save" id="saveSportsBtn">Save Preferences</button>
+                <button class="btn-cancel" id="cancelSportsBtn">Cancel</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Training Stats -->
+          <div class="profile-card animate-fadeInUp delay-3">
+            <div class="profile-card-header">
+              <h3>📊 Training Stats</h3>
+            </div>
+            <div class="profile-card-body">
+              <div class="profile-stats-grid">
+                <div class="profile-stat">
+                  <div class="profile-stat-value">24</div>
+                  <div class="profile-stat-label">Total Drills</div>
+                </div>
+                <div class="profile-stat">
+                  <div class="profile-stat-value">3</div>
+                  <div class="profile-stat-label">Sports</div>
+                </div>
+                <div class="profile-stat">
+                  <div class="profile-stat-value">40+</div>
+                  <div class="profile-stat-label">Hours Trained</div>
+                </div>
+                <div class="profile-stat">
+                  <div class="profile-stat-value">85%</div>
+                  <div class="profile-stat-label">Progress</div>
+                </div>
+              </div>
+              <div class="profile-progress-section">
+                <h4>Weekly Activity</h4>
+                <div class="progress-bars">
+                  <div class="progress-item">
+                    <span>Cricket</span>
+                    <div class="progress-bar"><div class="progress-fill cricket-fill" style="width:75%"></div></div>
+                    <span>75%</span>
+                  </div>
+                  <div class="progress-item">
+                    <span>Kabaddi</span>
+                    <div class="progress-bar"><div class="progress-fill kabaddi-fill" style="width:60%"></div></div>
+                    <span>60%</span>
+                  </div>
+                  <div class="progress-item">
+                    <span>Athletics</span>
+                    <div class="progress-bar"><div class="progress-fill athletics-fill" style="width:90%"></div></div>
+                    <span>90%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Danger Zone -->
+          <div class="profile-card animate-fadeInUp delay-4 danger-card">
+            <div class="profile-card-header">
+              <h3>⚠️ Account Actions</h3>
+            </div>
+            <div class="profile-card-body">
+              <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.9rem;">Manage your account or reset your data.</p>
+              <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                <button class="btn-danger-outline" onclick="if(confirm('Reset all training progress?')){alert('Progress reset!')}">Reset Progress</button>
+                <button class="btn-danger" onclick="if(confirm('Delete your account? This cannot be undone.')){logout()}">Delete Account</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

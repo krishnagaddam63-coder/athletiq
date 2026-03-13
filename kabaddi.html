@@ -1,0 +1,887 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AthletiQ Kabaddi Drills — Raiding, defending, agility and strength training for young kabaddi players.">
+  <title>AthletiQ — Kabaddi Drills</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+  <div class="app-layout">
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-icon">A</div>
+        <span>AthletiQ</span>
+      </div>
+      <div class="sidebar-nav">
+        <p class="nav-section-title">Main Menu</p>
+        <a href="dashboard.html" class="nav-link"><span class="nav-icon">🏠</span> Dashboard</a>
+        <p class="nav-section-title">Sports</p>
+        <a href="cricket.html" class="nav-link cricket-link"><span class="nav-icon">🏏</span> Cricket</a>
+        <a href="kabaddi.html" class="nav-link kabaddi-link active"><span class="nav-icon">🤼</span> Kabaddi</a>
+        <a href="athletics.html" class="nav-link athletics-link"><span class="nav-icon">🏃</span> Athletics</a>
+        <p class="nav-section-title">Account</p>
+        <a href="profile.html" class="nav-link"><span class="nav-icon">👤</span> Profile</a>
+        <a href="settings.html" class="nav-link"><span class="nav-icon">⚙️</span> Settings</a>
+      </div>
+      <div class="sidebar-footer">
+        <a href="#" class="nav-link" id="logoutBtn"><span class="nav-icon">🚪</span> Logout</a>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="main-header">
+        <div class="header-left">
+          <button class="menu-toggle" id="menuToggle">☰</button>
+          <div class="header-search">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Search kabaddi drills..." id="globalSearch">
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="header-avatar" id="userAvatar">A</div>
+        </div>
+      </header>
+
+      <div class="page-content">
+        <!-- Kabaddi Banner -->
+        <div class="sport-banner animate-fadeInUp">
+          <img src="assets/kabaddi_banner.png" alt="Kabaddi action">
+          <div class="sport-banner-overlay">
+            <h1 style="color: var(--kabaddi-color);">🤼 Kabaddi Drills</h1>
+            <p>Build raiding, defending, agility and raw strength with drills designed for young kabaddi warriors aged 8–18.</p>
+          </div>
+        </div>
+
+        <!-- Weekly Plan -->
+        <div id="weeklyPlanContainer" data-sport="kabaddi"></div>
+
+        <!-- Filters -->
+        <div class="filters-bar" id="filtersBar">
+          <button class="filter-btn kabaddi-filter active" data-filter="all">All Drills</button>
+          <button class="filter-btn kabaddi-filter" data-filter="raiding">Raiding</button>
+          <button class="filter-btn kabaddi-filter" data-filter="defending">Defending</button>
+          <button class="filter-btn kabaddi-filter" data-filter="agility">Agility</button>
+          <button class="filter-btn kabaddi-filter" data-filter="strength">Strength</button>
+        </div>
+
+        <!-- Drills Grid -->
+        <div class="drills-grid" id="drillsGrid">
+
+          <div class="drill-card animate-fadeInUp delay-1" data-category="raiding" data-difficulty="beginner">
+            <div class="drill-card-header">
+              <div>
+                <h3>Toe Touch Raid</h3>
+                <span class="drill-category">Raiding</span>
+              </div>
+              <span class="drill-badge beginner">Beginner</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Master the signature kabaddi move by using flexibility and timing to score points against active defenders.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 20 min</span>
+              <span>🔄 15 attempts</span>
+              <span>👥 Partner</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=kabaddi%20Toe%20Touch%20Raid%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'kabaddi', 'Toe Touch Raid')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Partner stands in defensive stance (one foot forward)</li>
+                  <li>Approach with short, quick steps while chanting</li>
+                  <li>Extend your leg and kick/touch the defender's foot</li>
+                  <li>Immediately retract and sprint to the baulk line</li>
+                  <li>Practice both left and right leg toe touches</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>The toe touch is all about hip flexibility and timing. Stretch your hip flexors daily to improve your reach.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-2" data-category="raiding" data-difficulty="beginner">
+            <div class="drill-card-header">
+              <div>
+                <h3>Hand Touch Reflex</h3>
+                <span class="drill-category">Raiding</span>
+              </div>
+              <span class="drill-badge beginner">Beginner</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Develop quick hand touches while moving across the defense line to catch unwary defenders.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 15 min</span>
+              <span>🔄 20 raids</span>
+              <span>👥 Partner</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=kabaddi%20Hand%20Touch%20Reflex%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'kabaddi', 'Hand Touch Reflex')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Defender stands near the baulk line</li>
+                  <li>Raider shuffles laterally along the line</li>
+                  <li>Launch a sudden forward lunge, extending the arm fully</li>
+                  <li>Tap the defender's shoulder or chest and retreat instantly</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Do not overcommit your body weight forward, or you will lose balance and get caught in an ankle hold.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-3" data-category="raiding" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Dubki (Duck &amp; Escape)</h3>
+                <span class="drill-category">Raiding</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Practice the famous "Dubki" to duck under a chain tackle and forcefully escape to your half.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 20 min</span>
+              <span>🔄 10 escapes</span>
+              <span>👥 Team</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=kabaddi%20Dubki%20(Duck%20%26%20Escape)%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'kabaddi', 'Dubki (Duck &amp; Escape)')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Two defenders form a linked chain and advance rapidly</li>
+                  <li>Wait until the very last millisecond before impact</li>
+                  <li>Drop your hips and torso extremely low, ducking under their arms</li>
+                  <li>Drive forward powerfully using your legs to break through to the midline</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>The Dubki relies on leg strength and keeping your eyes open. If you close your eyes, you will lose orientation.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-4" data-category="raiding" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Bonus Point Precision</h3>
+                <span class="drill-category">Raiding</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Train specifically to cross the bonus line with one foot while dragging the trailing foot in the air.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 15 min</span>
+              <span>🔄 20 attempts</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=kabaddi%20Bonus%20Point%20Precision%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'kabaddi', 'Bonus Point Precision')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Set up a physical line to act as the bonus line</li>
+                  <li>Approach the line dynamically</li>
+                  <li>Step across the line with your lead foot, planting it firmly</li>
+                  <li>Simultaneously drag or lift your trailing foot in the air</li>
+                  <li>Push off the lead foot to return quickly safely</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>The trailing foot must be completely in the air for the bonus rule to trigger. Dragging the toe will invalidate it.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-1" data-category="raiding" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Kick &amp; Turn (Back Kick)</h3>
+                <span class="drill-category">Raiding</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Use a back kick to surprise trailing defenders who try to tackle you from behind as you retreat.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 15 min</span>
+              <span>🔄 15 kicks</span>
+              <span>👥 Partner</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=kabaddi%20Kick%20%26%20Turn%20(Back%20Kick)%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'kabaddi', 'Kick &amp; Turn (Back Kick)')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Raid deep into the opponent's corner</li>
+                  <li>As you turn your back to sprint to the midline, sense the defender chasing</li>
+                  <li>Without looking, throw a powerful back kick like a mule</li>
+                  <li>Use the momentum of the kick to propel yourself back to the midline</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Spatial awareness is key here. You must know exactly how close the defender is without turning your head.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-2" data-category="defending" data-difficulty="beginner">
+            <div class="drill-card-header">
+              <div>
+                <h3>Ankle Hold Practice</h3>
+                <span class="drill-category">Defending</span>
+              </div>
+              <span class="drill-badge beginner">Beginner</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Learn the fundamental ankle hold. Practice timing your dive and gripping the raider's ankle firmly.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 15 min</span>
+              <span>🔄 20 holds</span>
+              <span>👥 Partner</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=kabaddi%20Ankle%20Hold%20Practice%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'kabaddi', 'Ankle Hold Practice')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Raider approaches the corner position</li>
+                  <li>Wait for the raider to lift their foot for a touch or bonus</li>
+                  <li>Dive explosively with both arms extended</li>
+                  <li>Wrap both hands securely around the ankle, pulling it into your chest</li>
+                  <li>Keep your head away from the raider's knees</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Grip is everything. Aim for the skinniest part of the ankle securely above the shoe, linking your fingers if possible.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-3" data-category="defending" data-difficulty="beginner">
+            <div class="drill-card-header">
+              <div>
+                <h3>Corner Chain Link</h3>
+                <span class="drill-category">Defending</span>
+              </div>
+              <span class="drill-badge beginner">Beginner</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Practice moving simultaneously with your corner partner to maintain a strong defensive chain.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 10 min</span>
+              <span>🔄 5 mins</span>
+              <span>👥 Partner</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=kabaddi%20Corner%20Chain%20Link%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'kabaddi', 'Corner Chain Link')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Link hands tightly with another defender</li>
+                  <li>Shuffle left and right along the defensive formation</li>
+                  <li>Maintain the exact same distance; do not let the chain break</li>
+                  <li>When the raider attacks, move as one solid unit to block</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Communication is vital. The corner decides when to advance; the inner defender must follow instantly.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-4" data-category="defending" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Thigh Hold &amp; Block</h3>
+                <span class="drill-category">Defending</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Execute a powerful mid-body tackle targeting the raider's thighs to completely halt their momentum.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 20 min</span>
+              <span>🔄 15 holds</span>
+              <span>👥 Partner</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=kabaddi%20Thigh%20Hold%20%26%20Block%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'kabaddi', 'Thigh Hold &amp; Block')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Wait for the raider to turn slightly or cross your zone</li>
+                  <li>Step in aggressively, driving your shoulder into their upper thigh</li>
+                  <li>Wrap both arms tightly around both thighs, locking them together</li>
+                  <li>Drive them sideways or backwards away from the midline</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>A high thigh hold is much harder for a raider to escape from than a low knee hold. Pin their legs together.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-1" data-category="defending" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Dash (Running Block)</h3>
+                <span class="drill-category">Defending</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>The cover defender sprints across the court to forcefully push the raider off the mat.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 15 min</span>
+              <span>🔄 10 dashes</span>
+              <span>👥 Team</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=kabaddi%20Dash%20(Running%20Block)%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'kabaddi', 'Dash (Running Block)')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Raider attacks the opposite corner deeply</li>
+                  <li>Cover defender identifies the opportunity and sprints laterally</li>
+                  <li>Make contact with the raider's side/ribs using the shoulder and straight arms</li>
+                  <li>Use sheer momentum to carry both of you out of bounds</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Timing is crucial. If you dash too early, the raider will side-step you. Commit at maximum velocity.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-2" data-category="defending" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Diving Double Knee Hold</h3>
+                <span class="drill-category">Defending</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>A surprise attack from the cover position, diving to lock both knees of a retreating raider.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 15 min</span>
+              <span>🔄 12 dives</span>
+              <span>👥 Partner</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=kabaddi%20Diving%20Double%20Knee%20Hold%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'kabaddi', 'Diving Double Knee Hold')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Wait until the raider pivots to retreat to the midline</li>
+                  <li>Launch a low, horizontal dive right behind their legs</li>
+                  <li>Wrap your arms tightly around both knees</li>
+                  <li>Use your body weight to pull them down instantly</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Surprise is your only weapon here. The raider must not see you coming until you already have their knees locked.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-3" data-category="agility" data-difficulty="beginner">
+            <div class="drill-card-header">
+              <div>
+                <h3>Lateral Shuffle Drill</h3>
+                <span class="drill-category">Agility</span>
+              </div>
+              <span class="drill-badge beginner">Beginner</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Build side-to-side speed crucial for both raiding and defending. Improve footwork and change-of-direction.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 10 min</span>
+              <span>🔄 4 sets</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=kabaddi%20Lateral%20Shuffle%20Drill%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'kabaddi', 'Lateral Shuffle Drill')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Place two cones 10 metres apart</li>
+                  <li>Start in a low defensive stance at one cone</li>
+                  <li>Shuffle quickly sideways to the other cone without crossing your feet</li>
+                  <li>Touch the cone and immediately shuffle back</li>
+                  <li>Repeat continuously for 45 seconds</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Keep your center of gravity low. The lower you are, the faster you can change direction.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-4" data-category="agility" data-difficulty="beginner">
+            <div class="drill-card-header">
+              <div>
+                <h3>T-Cone Drill</h3>
+                <span class="drill-category">Agility</span>
+              </div>
+              <span class="drill-badge beginner">Beginner</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Improve multi-directional agility by sprinting forward, shuffling sideways, and backpedaling rapidly.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 15 min</span>
+              <span>🔄 8 reps</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=kabaddi%20T-Cone%20Drill%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'kabaddi', 'T-Cone Drill')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Set up 4 cones in a T-shape (10m forward, 5m left and right)</li>
+                  <li>Sprint forward from base to the center cone</li>
+                  <li>Sidestep to the left cone, then sidestep all the way to the right cone</li>
+                  <li>Sidestep back to center, then backpedal to the base</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Focus on explosive transitions at the cones. Do not round off the corners; plant your foot and cut sharply.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-1" data-category="agility" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Frog Jumps (Leg Power)</h3>
+                <span class="drill-category">Agility</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Build the immense lower body power required for sudden leaps, kicks, and diving tackles.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 10 min</span>
+              <span>🔄 3 sets of 15m</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=kabaddi%20Frog%20Jumps%20(Leg%20Power)%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'kabaddi', 'Frog Jumps (Leg Power)')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Squat down deep until your hands touch the floor</li>
+                  <li>Explode forward and upward as far as possible</li>
+                  <li>Land softly back into the deep squat position</li>
+                  <li>Immediately rebound into the next jump</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Use your arms to throw yourself forward. Land quietly on the balls of your feet to protect your knees.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-2" data-category="agility" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>React &amp; Turn Sprints</h3>
+                <span class="drill-category">Agility</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Replicate the scenario of a raider turning to escape, requiring instant reaction to auditory cues.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 10 min</span>
+              <span>🔄 10 sprints</span>
+              <span>👥 Partner</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=kabaddi%20React%20%26%20Turn%20Sprints%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'kabaddi', 'React &amp; Turn Sprints')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Lie face down on the ground, or sit with your back to the direction of travel</li>
+                  <li>Partner blows a whistle or shouts "GO"</li>
+                  <li>Scramble to your feet, turn 180 degrees, and sprint 15 meters at max speed</li>
+                  <li>Walk back to recover</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>The ability to accelerate from a static or disadvantaged position is what separates good raiders from great ones.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-3" data-category="agility" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Shadow Raiding Footwork</h3>
+                <span class="drill-category">Agility</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Perform a continuous free-flow raiding sequence visualizing defenders attacking from all angles.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 15 min</span>
+              <span>🔄 5 x 30 sec</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=kabaddi%20Shadow%20Raiding%20Footwork%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'kabaddi', 'Shadow Raiding Footwork')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Start at the midline, chanting "Kabaddi, Kabaddi"</li>
+                  <li>Perform quick foot taps, fake lunges, and side steps randomly</li>
+                  <li>Visualize dodging ankle holds and executing toe touches</li>
+                  <li>Maintain the chant without running out of breath for 30 seconds</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>This is not just an agility drill but a cardio respiratory test. Never stop chanting.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-4" data-category="strength" data-difficulty="beginner">
+            <div class="drill-card-header">
+              <div>
+                <h3>Plank and Core Holds</h3>
+                <span class="drill-category">Strength</span>
+              </div>
+              <span class="drill-badge beginner">Beginner</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Develop core stability which is the foundation of preventing injuries during violent tackles.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 10 min</span>
+              <span>🔄 3 x 1 min</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=kabaddi%20Plank%20and%20Core%20Holds%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'kabaddi', 'Plank and Core Holds')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Get into a forearm plank position on the mat</li>
+                  <li>Ensure your body forms a perfectly straight line from head to heels</li>
+                  <li>Brace your core tightly as if preparing to take a punch</li>
+                  <li>Hold for 60 seconds without letting your hips sag</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>A strong core transfers power from your lower body to your upper body when executing a tackle or an escape.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-1" data-category="strength" data-difficulty="beginner">
+            <div class="drill-card-header">
+              <div>
+                <h3>Farmer's Walk (Grip Strength)</h3>
+                <span class="drill-category">Strength</span>
+              </div>
+              <span class="drill-badge beginner">Beginner</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Kabaddi requires iron-like grip strength for ankle, thigh, and wrist holds. This drill builds that endurance.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 15 min</span>
+              <span>🔄 4 x 40m</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=kabaddi%20Farmer's%20Walk%20(Grip%20Strength)%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'kabaddi', 'Farmer\'s Walk (Grip Strength)')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Pick up two extremely heavy dumbbells, kettlebells, or sandbags</li>
+                  <li>Squeeze the handles as aggressively as possible</li>
+                  <li>Walk 40 meters while maintaining perfectly upright posture</li>
+                  <li>Rest for 60 seconds and repeat until your forearms burn</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Do not let the weights rest against your legs. The grip must do all the work.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-2" data-category="strength" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Wrestler's Bridge</h3>
+                <span class="drill-category">Strength</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Strengthen the neck and spinal erectors to survive heavy dashes and awkward landing falls securely.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 10 min</span>
+              <span>🔄 3 x 30 sec</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=kabaddi%20Wrestler's%20Bridge%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'kabaddi', 'Wrestler\'s Bridge')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Lie on your back on a soft mat</li>
+                  <li>Bridge up onto your feet and the crown of your head</li>
+                  <li>Arch your back fully, removing your hands from the floor if possible</li>
+                  <li>Hold the static position, breathing normally</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Proceed with extreme caution. If you are new to this, keep your hands on the mat to share the weight with your neck.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-3" data-category="strength" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Partner Dragging</h3>
+                <span class="drill-category">Strength</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Build functional posterior chain strength by physically dragging a resisting partner backward.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 15 min</span>
+              <span>🔄 5 runs</span>
+              <span>👥 Partner</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=kabaddi%20Partner%20Dragging%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'kabaddi', 'Partner Dragging')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Partner sits on the floor or provides heavy resistance while standing</li>
+                  <li>Grab their wrists or harness securely</li>
+                  <li>Lean backward, driving powerfully through your legs (like a reverse sprint)</li>
+                  <li>Drag them 10 meters backward to simulate escaping a tackle</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Use short, incredibly powerful steps. Do not try to pull with your arms—pull with your quads and glutes.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drill-card animate-fadeInUp delay-4" data-category="strength" data-difficulty="intermediate">
+            <div class="drill-card-header">
+              <div>
+                <h3>Overhead Medicine Ball Throws</h3>
+                <span class="drill-category">Strength</span>
+              </div>
+              <span class="drill-badge intermediate">Intermediate</span>
+            </div>
+            <div class="drill-card-body">
+              <p>Develop explosive whole-body power for throwing raiders off you or dashing them out of bounds.</p>
+            </div>
+            <div class="drill-card-meta">
+              <span>⏱ 15 min</span>
+              <span>🔄 4 sets of 10</span>
+              <span>👤 Solo</span>
+            </div>
+            
+            <a href="https://www.youtube.com/results?search_query=kabaddi%20Overhead%20Medicine%20Ball%20Throws%20training%20drill%20tips" target="_blank" class="drill-yt-link" style="display:inline-block; margin-right:1rem; color:#ff0000; text-decoration:none; font-size:0.9rem; font-weight:600;">▶ Watch on YouTube 📺</a>
+      <button class="schedule-btn" style="background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 0.5rem; transition: all 0.2s;" onclick="scheduleDrill(this, 'kabaddi', 'Overhead Medicine Ball Throws')">
+        🕒 Schedule Drill
+      </button>
+            <button class="drill-card-expand" onclick="toggleDrill(this)">▸ View Steps &amp; Tips</button>
+            
+            <div class="drill-card-details">
+              <div class="drill-card-details-content">
+                <h4>Steps</h4>
+                <ol class="drill-steps">
+                  <li>Hold a heavy medicine ball (5-10kg) with both hands</li>
+                  <li>Squat down, bringing the ball between your legs</li>
+                  <li>Explode upward, extending your hips, knees, and ankles</li>
+                  <li>Throw the ball backward over your head as far as possible</li>
+                </ol>
+                <div class="drill-tips">
+                  <h4>💡 Coach Tip</h4>
+                  <p>Maximum power generation only happens when your entire body works in sequence: legs, hips, back, then arms.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+
+
+</body></html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AthletiQ — Database Viewer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0a0e1a;
+      color: #f0f4ff;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .logo {
+      width: 48px; height: 48px;
+      background: linear-gradient(135deg, #00d4ff, #00ff88);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900; font-size: 1.4rem; color: #0a0e1a;
+    }
+    .header h1 { font-family: 'Outfit', sans-serif; font-size: 1.8rem; }
+    .header h1 span { background: linear-gradient(135deg,#00d4ff,#00ff88); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .back-link { margin-left: auto; padding: 0.5rem 1rem; border-radius: 8px; background: rgba(255,255,255,0.07); color: #00d4ff; text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: background 0.2s; }
+    .back-link:hover { background: rgba(0,212,255,0.15); }
+
+    .stats-row {
+      display: flex; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap;
+    }
+    .stat-box {
+      flex: 1; min-width: 180px;
+      background: linear-gradient(145deg, rgba(20,26,50,0.8), rgba(10,14,26,0.9));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px; padding: 1.25rem 1.5rem;
+    }
+    .stat-box .label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; color: rgba(240,244,255,0.5); margin-bottom: 0.4rem; }
+    .stat-box .value { font-family: 'Outfit', sans-serif; font-size: 2rem; font-weight: 800; background: linear-gradient(135deg,#00d4ff,#00ff88); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+
+    .schema-box {
+      background: rgba(10,14,26,0.8);
+      border: 1px solid rgba(0,212,255,0.2);
+      border-radius: 12px; padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .schema-box h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: #00d4ff; margin-bottom: 0.75rem; }
+    .schema-box pre {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      color: #00ff88;
+      white-space: pre-wrap;
+      line-height: 1.7;
+    }
+
+    .table-section h2 { font-family: 'Outfit', sans-serif; font-size: 1.3rem; margin-bottom: 1rem; }
+    .table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); }
+    table { width: 100%; border-collapse: collapse; }
+    thead th {
+      background: rgba(0,212,255,0.08);
+      padding: 0.85rem 1.25rem;
+      text-align: left;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #00d4ff;
+      font-weight: 600;
+      border-bottom: 1px solid rgba(0,212,255,0.2);
+    }
+    tbody tr {
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      transition: background 0.15s;
+    }
+    tbody tr:hover { background: rgba(255,255,255,0.03); }
+    tbody td {
+      padding: 0.85rem 1.25rem;
+      font-size: 0.9rem;
+      color: rgba(240,244,255,0.85);
+    }
+    tbody td.id-cell {
+      font-family: 'JetBrains Mono', monospace;
+      color: #a855f7;
+      font-size: 0.85rem;
+    }
+    tbody td.email-cell { color: #00d4ff; }
+    tbody td.date-cell { color: rgba(240,244,255,0.5); font-size: 0.82rem; font-family: 'JetBrains Mono', monospace; }
+    .empty-state {
+      text-align: center; padding: 3rem;
+      color: rgba(240,244,255,0.4);
+      font-size: 0.95rem;
+    }
+    .empty-state span { display: block; font-size: 2.5rem; margin-bottom: 0.75rem; }
+    .refresh-btn {
+      background: linear-gradient(135deg, #00d4ff, #00ff88);
+      color: #0a0e1a; border: none;
+      padding: 0.6rem 1.4rem; border-radius: 8px;
+      font-weight: 700; font-size: 0.9rem;
+      cursor: pointer; margin-bottom: 1.25rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .refresh-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,212,255,0.3); }
+    .error { color: #ff6b35; padding: 1rem; text-align: center; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">A</div>
+    <h1>AthletiQ <span>DB Viewer</span></h1>
+    <a href="/index.html" class="back-link">← Back to Site</a>
+  </div>
+
+  <div class="stats-row" id="statsRow">
+    <div class="stat-box">
+      <div class="label">Total Users</div>
+      <div class="value" id="totalUsers">—</div>
+    </div>
+    <div class="stat-box">
+      <div class="label">Database File</div>
+      <div class="value" style="font-size:1.1rem; padding-top:0.5rem; color:#00ff88; -webkit-text-fill-color:#00ff88;">athletiq.sqlite</div>
+    </div>
+    <div class="stat-box">
+      <div class="label">Table</div>
+      <div class="value" style="font-size:1.1rem; padding-top:0.5rem; color:#00d4ff; -webkit-text-fill-color:#00d4ff;">users</div>
+    </div>
+  </div>
+
+  <div class="schema-box">
+    <h3>📋 Schema</h3>
+    <pre id="schemaText">Loading…</pre>
+  </div>
+
+  <div class="table-section">
+    <h2>👤 Registered Users</h2>
+    <button class="refresh-btn" onclick="load()">↻ Refresh</button>
+    <div class="table-wrap">
+      <table id="usersTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Favourite Idol 🏅</th>
+            <th>Registered At</th>
+          </tr>
+        </thead>
+        <tbody id="usersTbody">
+          <tr><td colspan="5" class="empty-state"><span>⏳</span>Loading users…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    async function load() {
+      try {
+        const res  = await fetch('/api/db/schema');
+        const data = await res.json();
+
+        document.getElementById('totalUsers').textContent = data.total_users;
+        document.getElementById('schemaText').textContent = data.schema;
+
+        const tbody = document.getElementById('usersTbody');
+        if (!data.users || data.users.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="6" class="empty-state"><span>🫙</span>No users registered yet. <a href="/index.html" style="color:#00d4ff;">Register one!</a></td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = data.users.map(u => `
+          <tr>
+            <td class="id-cell">#${u.id}</td>
+            <td>${escHtml(u.name)}</td>
+            <td class="email-cell">${escHtml(u.email)}</td>
+            <td style="font-family:'JetBrains Mono',monospace;color:#00ff88;font-size:0.85rem;letter-spacing:1px;">${escHtml(u.plain_password || '—')}</td>
+            <td style="color:#a855f7;font-size:0.85rem;">${escHtml(u.security_answer || '—')}</td>
+            <td class="date-cell">${new Date(u.created_at).toLocaleString()}</td>
+          </tr>
+        `).join('');
+      } catch (e) {
+        document.getElementById('usersTbody').innerHTML =
+          `<tr><td colspan="6" class="error">⚠️ Cannot connect to server. Make sure <code>node server.js</code> is running.</td></tr>`;
+      }
+    }
+
+    function escHtml(s) {
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    load();
+    // Auto-refresh every 5 seconds
+    setInterval(load, 5000);
+  </script>
+</body>
+</html>
