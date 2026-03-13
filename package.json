@@ -1,11 +1,11 @@
 {
-  "name": "project",
+  "name": "athletiq",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "AthletiQ — Sports Training & Analytics Platform",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "setup-db": "node setup_db.js",
+    "dev": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -14,9 +14,8 @@
   "type": "commonjs",
   "dependencies": {
     "bcryptjs": "^3.0.3",
-    "better-sqlite3": "^12.6.2",
-    "cheerio": "^1.2.0",
     "cors": "^2.8.6",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "pg": "^8.20.0"
   }
 }

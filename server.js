@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const path = require('path');
-const Database = require('better-sqlite3');
+const { Pool } = require('pg');
 
 // ─── Optional Twilio SMS (set env vars to enable) ─────────────────────────
 // To activate real SMS: set env vars TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_FROM
@@ -22,40 +22,48 @@ async function sendSmsViaProvider(to, message) {
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// ─── Database ────────────────────────────────────────────────
-const DB_PATH = path.join(__dirname, 'athletiq.sqlite');
-const db = new Database(DB_PATH);
-db.pragma('journal_mode = WAL');
+// ─── PostgreSQL Database ──────────────────────────────────────────────────
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
+});
 
-// Ensure users table exists (with security question support)
-db.exec(`
-  CREATE TABLE IF NOT EXISTS users (
-    id               INTEGER PRIMARY KEY AUTOINCREMENT,
-    name             TEXT NOT NULL,
-    email            TEXT NOT NULL UNIQUE,
-    password         TEXT NOT NULL,
-    security_answer  TEXT NOT NULL DEFAULT '',
-    plain_password   TEXT NOT NULL DEFAULT '',
-    created_at       DATETIME DEFAULT CURRENT_TIMESTAMP
-  );
-`);
+// ─── Initialize Tables ────────────────────────────────────────────────────
+async function initDb() {
+  const client = await pool.connect();
+  try {
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS users (
+        id               SERIAL PRIMARY KEY,
+        name             TEXT NOT NULL,
+        email            TEXT NOT NULL UNIQUE,
+        password         TEXT NOT NULL,
+        security_answer  TEXT NOT NULL DEFAULT '',
+        plain_password   TEXT NOT NULL DEFAULT '',
+        phone            TEXT NOT NULL DEFAULT '',
+        is_public        INTEGER DEFAULT 0,
+        created_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
 
-// Add columns if upgrading an existing DB (safe to run multiple times)
-try { db.exec(`ALTER TABLE users ADD COLUMN security_answer TEXT NOT NULL DEFAULT ''`); } catch(_) {}
-try { db.exec(`ALTER TABLE users ADD COLUMN plain_password  TEXT NOT NULL DEFAULT ''`); } catch(_) {}
-try { db.exec(`ALTER TABLE users ADD COLUMN phone TEXT NOT NULL DEFAULT ''`); } catch(_) {}
-// Create schedules table for user notifications
-db.exec(`
-  CREATE TABLE IF NOT EXISTS schedules (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id INTEGER NOT NULL,
-    sport TEXT NOT NULL,
-    drill_title TEXT NOT NULL,
-    scheduled_time DATETIME NOT NULL,
-    notified INTEGER DEFAULT 0,
-    FOREIGN KEY (user_id) REFERENCES users(id)
-  )
-`);
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS schedules (
+        id             SERIAL PRIMARY KEY,
+        user_id        INTEGER NOT NULL REFERENCES users(id),
+        sport          TEXT NOT NULL,
+        drill_title    TEXT NOT NULL,
+        scheduled_time TIMESTAMP NOT NULL,
+        notified       INTEGER DEFAULT 0
+      )
+    `);
+
+    console.log('✅ Database tables ready.');
+  } catch (err) {
+    console.error('❌ DB init error:', err.message);
+  } finally {
+    client.release();
+  }
+}
 
 // ─── Middleware ───────────────────────────────────────────────
 app.use(cors());
@@ -82,26 +90,20 @@ app.post('/api/auth/register', async (req, res) => {
   }
 
   try {
-    const hashedPass = await bcrypt.hash(password, 10);
+    const hashedPass   = await bcrypt.hash(password, 10);
     const hashedAnswer = await bcrypt.hash(security_answer.trim().toLowerCase(), 10);
-    
-    const stmt = db.prepare(
-      'INSERT INTO users (name, email, password, security_answer, plain_password, phone) VALUES (?, ?, ?, ?, ?, ?)'
+
+    const result = await pool.query(
+      'INSERT INTO users (name, email, password, security_answer, plain_password, phone) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id',
+      [name, email.toLowerCase(), hashedPass, hashedAnswer, '', phone.trim()]
     );
-    const result = stmt.run(
-      name,
-      email.toLowerCase(),
-      hashedPass,
-      hashedAnswer,
-      '',   // Security update: plain_password is NO LONGER stored
-      phone.trim()
-    );
+
     res.status(201).json({
       message: 'Account created successfully!',
-      userId: result.lastInsertRowid
+      userId: result.rows[0].id
     });
   } catch (err) {
-    if (err.message.includes('UNIQUE constraint failed')) {
+    if (err.code === '23505') {
       return res.status(409).json({ error: 'An account with that email already exists.' });
     }
     console.error(err);
@@ -109,27 +111,31 @@ app.post('/api/auth/register', async (req, res) => {
   }
 });
 
-// POST /api/auth/forgot-password  — Verify security answer & return password
+// POST /api/auth/forgot-password  — Verify security answer
 app.post('/api/auth/forgot-password', async (req, res) => {
   const { email, security_answer } = req.body;
   if (!email || !security_answer) {
     return res.status(400).json({ error: 'Email and security answer are required.' });
   }
-  const user = db.prepare('SELECT * FROM users WHERE email = ?').get(email.toLowerCase());
-  if (!user) {
-    return res.status(404).json({ error: 'No account found with that email.' });
-  }
 
-  // Security update: security_answer is now hashed
-  const match = await bcrypt.compare(security_answer.trim().toLowerCase(), user.security_answer);
-  if (!match) {
-    return res.status(401).json({ error: 'Incorrect answer. Please try again.' });
+  try {
+    const result = await pool.query('SELECT * FROM users WHERE email = $1', [email.toLowerCase()]);
+    const user = result.rows[0];
+
+    if (!user) {
+      return res.status(404).json({ error: 'No account found with that email.' });
+    }
+
+    const match = await bcrypt.compare(security_answer.trim().toLowerCase(), user.security_answer);
+    if (!match) {
+      return res.status(401).json({ error: 'Incorrect answer. Please try again.' });
+    }
+
+    res.json({ message: 'Identity verified.', userId: user.id });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error. Please try again.' });
   }
-  
-  // Security update: We NO LONGER return the password. 
-  // In a real app, we would return a reset token. 
-  // For now, we return success and the userId to allow a reset flow.
-  res.json({ message: 'Identity verified.', userId: user.id });
 });
 
 // POST /api/auth/reset-password  — Update password for a verified user
@@ -144,13 +150,15 @@ app.post('/api/auth/reset-password', async (req, res) => {
 
   try {
     const hashedPass = await bcrypt.hash(newPassword, 10);
-    const stmt = db.prepare('UPDATE users SET password = ?, plain_password = \'\' WHERE id = ?');
-    const result = stmt.run(hashedPass, userId);
-    
-    if (result.changes === 0) {
+    const result = await pool.query(
+      "UPDATE users SET password = $1, plain_password = '' WHERE id = $2",
+      [hashedPass, userId]
+    );
+
+    if (result.rowCount === 0) {
       return res.status(404).json({ error: 'User not found.' });
     }
-    
+
     res.json({ message: 'Password reset successful! You can now sign in.' });
   } catch (err) {
     console.error(err);
@@ -167,7 +175,9 @@ app.post('/api/auth/login', async (req, res) => {
   }
 
   try {
-    const user = db.prepare('SELECT * FROM users WHERE email = ?').get(email.toLowerCase());
+    const result = await pool.query('SELECT * FROM users WHERE email = $1', [email.toLowerCase()]);
+    const user = result.rows[0];
+
     if (!user) {
       return res.status(401).json({ error: 'Invalid email or password.' });
     }
@@ -195,48 +205,58 @@ app.post('/api/auth/login', async (req, res) => {
 });
 
 // GET /api/db/schema  — Show the users table schema + masked user records
-app.get('/api/db/schema', (req, res) => {
-  const schema = db.prepare("SELECT sql FROM sqlite_master WHERE type='table' AND name='users'").get();
-  const count   = db.prepare('SELECT COUNT(*) AS total FROM users').get();
-  const users   = db.prepare('SELECT id, name, email, phone, created_at FROM users ORDER BY id').all().map(u => ({
-    ...u,
-    password: '[ENCRYPTED]',
-    security_answer: '[ENCRYPTED]',
-    plain_password: '[REMOVED]'
-  }));
-  res.json({
-    table: 'users',
-    schema: schema.sql,
-    total_users: count.total,
-    users
-  });
+app.get('/api/db/schema', async (req, res) => {
+  try {
+    const countResult = await pool.query('SELECT COUNT(*) AS total FROM users');
+    const usersResult = await pool.query('SELECT id, name, email, phone, created_at FROM users ORDER BY id');
+    const users = usersResult.rows.map(u => ({
+      ...u,
+      password: '[ENCRYPTED]',
+      security_answer: '[ENCRYPTED]',
+      plain_password: '[REMOVED]'
+    }));
+    res.json({
+      table: 'users',
+      total_users: parseInt(countResult.rows[0].total),
+      users
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 // GET /api/db/users  — Return all registered users (fully masked)
-app.get('/api/db/users', (req, res) => {
-  const users = db.prepare('SELECT id, name, email, phone, created_at FROM users ORDER BY id').all().map(u => ({
-    ...u,
-    password: '[ENCRYPTED]',
-    security_answer: '[ENCRYPTED]',
-    plain_password: '[REMOVED]'
-  }));
-  res.json({ total: users.length, users });
+app.get('/api/db/users', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT id, name, email, phone, created_at FROM users ORDER BY id');
+    const users = result.rows.map(u => ({
+      ...u,
+      password: '[ENCRYPTED]',
+      security_answer: '[ENCRYPTED]',
+      plain_password: '[REMOVED]'
+    }));
+    res.json({ total: users.length, users });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 // ─── Schedules API ──────────────────────────────────────────────
 
 // POST /api/schedules - Schedule a drill
-app.post('/api/schedules', (req, res) => {
+app.post('/api/schedules', async (req, res) => {
   const { user_id, sport, title, scheduled_time } = req.body;
-  
+
   if (!user_id || !sport || !title || !scheduled_time) {
     return res.status(400).json({ error: 'All fields are required to schedule a drill.' });
   }
-  
+
   try {
-    const stmt = db.prepare('INSERT INTO schedules (user_id, sport, drill_title, scheduled_time, notified) VALUES (?, ?, ?, ?, 0)');
-    const result = stmt.run(user_id, sport, title, scheduled_time);
-    res.json({ message: 'Drill scheduled successfully!', id: result.lastInsertRowid });
+    const result = await pool.query(
+      'INSERT INTO schedules (user_id, sport, drill_title, scheduled_time, notified) VALUES ($1, $2, $3, $4, 0) RETURNING id',
+      [user_id, sport, title, scheduled_time]
+    );
+    res.json({ message: 'Drill scheduled successfully!', id: result.rows[0].id });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Failed to schedule drill' });
@@ -244,37 +264,39 @@ app.post('/api/schedules', (req, res) => {
 });
 
 // GET /api/schedules/:userId - Get schedules for a user
-app.get('/api/schedules/:userId', (req, res) => {
+app.get('/api/schedules/:userId', async (req, res) => {
   try {
-    const schedules = db.prepare('SELECT id, user_id, sport, drill_title AS title, scheduled_time, notified FROM schedules WHERE user_id = ? ORDER BY scheduled_time ASC').all(req.params.userId);
-    res.json(schedules);
+    const result = await pool.query(
+      'SELECT id, user_id, sport, drill_title AS title, scheduled_time, notified FROM schedules WHERE user_id = $1 ORDER BY scheduled_time ASC',
+      [req.params.userId]
+    );
+    res.json(result.rows);
   } catch (err) {
     res.status(500).json({ error: 'Failed to get schedules' });
   }
 });
 
 // GET /api/reports/:userId - Get weekly report summary
-app.get('/api/reports/:userId', (req, res) => {
+app.get('/api/reports/:userId', async (req, res) => {
   try {
-    const schedules = db.prepare('SELECT * FROM schedules WHERE user_id = ? AND scheduled_time >= datetime("now", "-7 days")').all(req.params.userId);
+    const result = await pool.query(
+      "SELECT * FROM schedules WHERE user_id = $1 AND scheduled_time >= NOW() - INTERVAL '7 days'",
+      [req.params.userId]
+    );
+    const schedules = result.rows;
     const totalSchedules = schedules.length;
+
     let sportsCount = {};
     schedules.forEach(s => {
       sportsCount[s.sport] = (sportsCount[s.sport] || 0) + 1;
     });
-    
+
     let reportText = `You scheduled ${totalSchedules} drills this week. `;
-    if (totalSchedules > 0) {
-      reportText += "Great consistency! Keep pushing your limits.";
-    } else {
-      reportText += "Let's get back on track. Try scheduling a drill today!";
-    }
-    
-    res.json({
-      total: totalSchedules,
-      breakdown: sportsCount,
-      summary: reportText
-    });
+    reportText += totalSchedules > 0
+      ? 'Great consistency! Keep pushing your limits.'
+      : "Let's get back on track. Try scheduling a drill today!";
+
+    res.json({ total: totalSchedules, breakdown: sportsCount, summary: reportText });
   } catch (err) {
     res.status(500).json({ error: 'Failed to generate report' });
   }
@@ -282,7 +304,7 @@ app.get('/api/reports/:userId', (req, res) => {
 
 // ─── SMS Reminder API ─────────────────────────────────────────────────────
 
-// POST /api/send-sms  — Trigger an SMS notification (called by browser or scheduler)
+// POST /api/send-sms  — Trigger an SMS notification
 app.post('/api/send-sms', async (req, res) => {
   const { phone, message } = req.body;
   if (!phone || !message) {
@@ -297,75 +319,59 @@ app.post('/api/send-sms', async (req, res) => {
   }
 });
 
-
 // GET /db  — Serve the visual database viewer page
 app.get('/db', (req, res) => {
   res.sendFile(path.join(__dirname, 'db_viewer.html'));
 });
 
-
 // ─── Start ────────────────────────────────────────────────────
-app.listen(PORT, () => {
-  console.log(`\n🚀 AthletiQ server running at http://localhost:${PORT}`);
-  console.log(`📋 DB Schema:      http://localhost:${PORT}/api/db/schema`);
-  console.log(`🔐 Register:       POST http://localhost:${PORT}/api/auth/register`);
-  console.log(`🔑 Login:          POST http://localhost:${PORT}/api/auth/login`);
-  console.log(`🌐 Website:        http://localhost:${PORT}/index.html`);
-  console.log(`📱 SMS Reminder Scheduler: running (checks every 60s)\n`);
+initDb().then(() => {
+  app.listen(PORT, () => {
+    console.log(`\n🚀 AthletiQ server running at http://localhost:${PORT}`);
+    console.log(`📋 DB Schema:      http://localhost:${PORT}/api/db/schema`);
+    console.log(`🔐 Register:       POST http://localhost:${PORT}/api/auth/register`);
+    console.log(`🔑 Login:          POST http://localhost:${PORT}/api/auth/login`);
+    console.log(`🌐 Website:        http://localhost:${PORT}/index.html`);
+    console.log(`📱 SMS Reminder Scheduler: running (checks every 60s)\n`);
 
-  // ─── Server-side Drill Reminder Scheduler ──────────────────────────────
-  // Runs every 60 seconds. Finds scheduled drills that:
-  //   • start within the next 30 minutes
-  //   • have NOT been notified yet (notified = 0)
-  // Then sends an SMS to the user's stored phone number and marks notified = 1.
-  setInterval(async () => {
-    try {
-      const now        = new Date();
-      const in30       = new Date(now.getTime() + 30 * 60 * 1000);  // 30 min from now
-      const in31       = new Date(now.getTime() + 31 * 60 * 1000);  // +1 min buffer
+    // ─── Server-side Drill Reminder Scheduler ──────────────────────────────
+    setInterval(async () => {
+      try {
+        const upcoming = await pool.query(`
+          SELECT s.id, s.drill_title AS title, s.sport, s.scheduled_time,
+                 u.name AS user_name, u.phone AS user_phone
+          FROM   schedules s
+          JOIN   users u ON u.id = s.user_id
+          WHERE  s.notified = 0
+            AND  s.scheduled_time >= NOW() + INTERVAL '29 minutes'
+            AND  s.scheduled_time <= NOW() + INTERVAL '31 minutes'
+        `);
 
-      // ISO strings for SQLite comparison
-      const nowISO  = now.toISOString();
-      const in30ISO = in30.toISOString();
-      const in31ISO = in31.toISOString();
+        for (const drill of upcoming.rows) {
+          if (!drill.user_phone) {
+            console.log(`⚠️  No phone for user "${drill.user_name}" — skipping SMS`);
+            continue;
+          }
 
-      // Find unnotified drills coming up in ~30 minutes
-      const upcoming = db.prepare(`
-        SELECT s.id, s.drill_title AS title, s.sport, s.scheduled_time,
-               u.name AS user_name, u.phone AS user_phone
-        FROM   schedules s
-        JOIN   users u ON u.id = s.user_id
-        WHERE  s.notified = 0
-          AND  s.scheduled_time >= ?
-          AND  s.scheduled_time <= ?
-      `).all(in30ISO, in31ISO);
+          const schedTime = new Date(drill.scheduled_time);
+          const timeStr = schedTime.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
+          const dateStr = schedTime.toLocaleDateString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+          const smsMessage = `AthletiQ Reminder 🏆: Hi ${drill.user_name}! Your ${drill.sport} drill "${drill.title}" starts in 30 minutes at ${timeStr} on ${dateStr}. Get ready! 💪`;
 
-      for (const drill of upcoming) {
-        if (!drill.user_phone) {
-          console.log(`⚠️  No phone for user "${drill.user_name}" — skipping SMS reminder for "${drill.title}"`);
-          continue;
+          try {
+            await sendSmsViaProvider(drill.user_phone, smsMessage);
+            await pool.query('UPDATE schedules SET notified = 1 WHERE id = $1', [drill.id]);
+            console.log(`✅ Reminder sent to ${drill.user_phone} for drill "${drill.title}"`);
+          } catch (smsErr) {
+            console.error(`❌ SMS failed for drill ${drill.id}:`, smsErr.message);
+          }
         }
-
-        const schedTime  = new Date(drill.scheduled_time);
-        const timeStr    = schedTime.toLocaleTimeString('en-IN', {
-          hour: '2-digit', minute: '2-digit', hour12: true
-        });
-        const dateStr    = schedTime.toLocaleDateString('en-IN', {
-          weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-        });
-        const smsMessage = `AthletiQ Reminder 🏆: Hi ${drill.user_name}! Your ${drill.sport} drill "${drill.title}" starts in 30 minutes at ${timeStr} on ${dateStr}. Get ready! 💪`;
-
-        try {
-          await sendSmsViaProvider(drill.user_phone, smsMessage);
-          // Mark this schedule as notified so it never fires again
-          db.prepare('UPDATE schedules SET notified = 1 WHERE id = ?').run(drill.id);
-          console.log(`✅ Reminder sent to ${drill.user_phone} for drill "${drill.title}"`);
-        } catch (smsErr) {
-          console.error(`❌ SMS failed for drill ${drill.id}:`, smsErr.message);
-        }
+      } catch (err) {
+        console.error('Scheduler error:', err.message);
       }
-    } catch (err) {
-      console.error('Scheduler error:', err.message);
-    }
-  }, 60 * 1000); // every 60 seconds
+    }, 60 * 1000);
+  });
+}).catch(err => {
+  console.error('❌ Failed to connect to database:', err.message);
+  process.exit(1);
 });
